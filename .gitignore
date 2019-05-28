@@ -1,5 +1,6 @@
 *.class
 context.xml
+Servers/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

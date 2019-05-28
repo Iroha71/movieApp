@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="lib/bootstrap.min.css">
 <title>ログイン画面</title>
 </head>
 <body>
@@ -15,11 +16,17 @@
 					<p>メールアドレスまたはパスワードが間違っています</p>
 				<%} %>
 				<form action="auth" method="POST">
-					<label>メールアドレス</label>
-					<input type="text" name="mail">
-					<label>パスワード</label>
-					<input type="password" name="password">
-					<button type="submit">ログイン</button>
+					<div class="form-group">
+						<label>メールアドレス</label>
+						<input type="text" name="mail" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>パスワード</label>
+						<input type="password" name="password" class="form-control">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="form-control">ログイン</button>
+					</div>
 				</form>
 			</div>
 		</div>

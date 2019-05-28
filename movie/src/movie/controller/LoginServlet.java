@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
 		UserModel userModel=new UserModel();
 		String loginInfo=userModel.login(mail, password);
 		if(loginInfo!=null) {
+			session.setAttribute("loginInfo", loginInfo);
 			resp.sendRedirect("userLoginFinish");
 		}else {
 			resp.sendRedirect("userLogin?error=mistake");

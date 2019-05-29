@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MemberDao extends DaoBase{
+public class UserDao extends DaoBase{
 	public String getBy(String mail,String password)throws SQLException{
 		//ビーンズを使う
 		String loginInfo=null;

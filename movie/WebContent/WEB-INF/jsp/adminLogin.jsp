@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<form class="col-8" action="adminAuth" method="POST">
-				<%if(error.equals("mistake")&&error!=null){ %>
+				<%if(error!=null&&error.equals("mistake")){ %>
 					<p>メールアドレスまたはパスワードが間違っています</p>
 				<%} %>
 				<div class="form-group">

@@ -12,7 +12,6 @@
 	<input type="hidden" name="term" value = 1>
 	<input type="hidden" name="theater" value="1">
 	<input type="hidden" name ="screen" value=1>
-	<input type="hidden"name = "date" value="2019-03-22">
 	<input type="hidden" name = "sheet" value=1>
 	<input type="hidden" name = "fee" value="1">
 	<input type ="submit" name="button" value="予約する">

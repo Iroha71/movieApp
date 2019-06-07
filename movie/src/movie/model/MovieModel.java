@@ -25,7 +25,8 @@ public class MovieModel {
 		try {
 			movieDao.connect();
 			//DBにfeeTypeがない,movieIdの取り方
-			//movieDao.insert(adminId, movieName, releaseDate, finishDate, directed, cast, ticketPrice, movieDetail);
+			//DBのmovie_feeが存在しないカラムでできてる
+//			movieDao.insert(adminId, movieName, releaseDate, finishDate, directed, cast, ticketPrice, movieDetail);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

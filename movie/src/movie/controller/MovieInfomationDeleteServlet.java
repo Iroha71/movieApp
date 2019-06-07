@@ -17,6 +17,7 @@ public class MovieInfomationDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//削除する映画パラメータの取得
+		//sessionをかんりしゃログインに追加
 		String movieId=req.getParameter("movieId");
 		String movieName=req.getParameter("movieName");
 		HttpSession session=req.getSession();

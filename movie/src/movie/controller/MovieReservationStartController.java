@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 public class MovieReservationStartController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/reservation.jsp");
-		
+
 		dispatcher.forward(request,response);
-		
+
 	}
 }

@@ -27,15 +27,16 @@ public class MovieReservationController extends HttpServlet {
 		Integer ScreenNumber = Integer.parseInt((String)request.getParameter("screen"));
 		Integer MemberNumber = Integer.parseInt((String)request.getParameter("member"));
 
-		String[] sheet = request.getParameterValues("sheet");
-		for(String sheets : sheet) {
-			System.out.print(sheets);
+		String[] sheets = request.getParameterValues("sheet");
+		String[] fees = request.getParameterValues("fee");
+		
+		//
+		for(String sheet : sheets) {
+			SheetNumber.add(Integer.parseInt(sheet));
 		}
-		//とりあえず、予約を一つだけ登録できるようにする
-		//複数同時予約の場合は、splitか何か使ってリストに入れれるようにしたいかも
-			SheetNumber.add(Integer.parseInt((String)request.getParameter("sheet")));
-			FeeType.add((String)request.getParameter("fee"));
-
+		for(String fee : fees) {
+			FeeType.add(fee);
+		}
 		//映画予約するreserveModelを呼び出す
 		reserveModel reserve = new reserveModel();
 

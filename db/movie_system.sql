@@ -1,7 +1,7 @@
 /*映画予約システム SQL(梅木) 変更したらバージョン記述↓ */
-/* ver1.3 */
+/* ver1.4 */
 
-DROP TABLE movie_reervation_item;
+DROP TABLE movie_reservation_item;
 
 DROP TABLE movie_reservation;
 
@@ -106,7 +106,7 @@ CREATE TABLE movie(
 
 CREATE TABLE movie_term(
 	movie_term_number integer auto_increment NOT NULL,
-	movie_id varchar(128) NOT NULL,
+	movie_id integer NOT NULL,
 	term_type varchar(128) NOT NULL,
 	primary key (movie_term_number),
 	foreign key (movie_id) references movie(movie_id),
@@ -118,8 +118,8 @@ CREATE TABLE movie_term(
 /*映画料金table*/
 
 CREATE TABLE movie_fee(
-	movie_fee_number integer NOT NULL,
-	movie_id varchar(128) NOT NULL,
+	movie_fee_number integer auto_increment NOT NULL,
+	movie_id integer NOT NULL,
 	fee_type varchar(128) NOT NULL,
 	primary key(movie_fee_number),
 	foreign key (movie_id) references movie(movie_id),
@@ -135,7 +135,6 @@ CREATE TABLE movie_reservation(
 	theater_id varchar(128) NOT NULL,
 	screen_number integer NOT NULL,
 	member_number integer NOT NULL,
-	reservation_date date NOT NULL,
 	primary key (reservation_number),
 	foreign key (movie_term_number) references movie_term(movie_term_number),
 	foreign key (theater_id,screen_number) references screen(theater_id,screen_number),
@@ -149,7 +148,7 @@ CREATE TABLE movie_reservation(
 
 CREATE TABLE movie_reservation_item(
 	reservation_number integer NOT NULL,
-	sheet_number varchar(2) NOT NULL,
+	sheet_number integer NOT NULL,
 	movie_fee_number integer NOT NULL,
 	primary key(reservation_number,sheet_number),
 	foreign key (reservation_number) references movie_reservation(reservation_number),

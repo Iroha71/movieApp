@@ -1,6 +1,6 @@
 package movie.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import movie.dao.MovieDao;
 
@@ -20,13 +20,11 @@ public class MovieModel {
 		}
 	}
 
-	public void createMovie(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String movieDetail) {
+	public void createMovie(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail) {
 		MovieDao movieDao=new MovieDao();
 		try {
 			movieDao.connect();
-			//DBにfeeTypeがない,movieIdの取り方
-			//DBのmovie_feeが存在しないカラムでできてる
-//			movieDao.insert(adminId, movieName, releaseDate, finishDate, directed, cast, ticketPrice, movieDetail);
+			movieDao.insert(adminId, movieName, releaseDate, finishDate, directed, cast, fee_type, movieDetail);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

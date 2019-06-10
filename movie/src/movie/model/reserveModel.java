@@ -5,8 +5,8 @@ import java.util.List;
 import movie.dao.ReservationDao;
 
 public class reserveModel {
-	public void reserveMovie(int MovieTermNumber,String TheaterId,int ScreenNumber,
-			int MemberNumber,List SheetNumber,List FeeType) {
+	public void reserveMovie(Integer MovieTermNumber,String TheaterId,Integer ScreenNumber,
+			Integer MemberNumber,List SheetNumber,List FeeType) {
 
 		ReservationDao reservation = new ReservationDao();
 
@@ -14,8 +14,10 @@ public class reserveModel {
 
 			reservation.connect();
 
-			reservation.insert(MovieTermNumber,TheaterId,ScreenNumber,
-					MemberNumber,SheetNumber,FeeType);
+			reservation.insertReservation(MovieTermNumber,TheaterId,ScreenNumber,MemberNumber);
+
+			reservation.insertReservationItem(MovieTermNumber,TheaterId,ScreenNumber,MemberNumber,SheetNumber,FeeType);
+
 		}catch(Exception e) {
 
 			e.printStackTrace();

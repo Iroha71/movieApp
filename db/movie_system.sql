@@ -1,5 +1,5 @@
 /*映画予約システム SQL(梅木) 変更したらバージョン記述↓ */
-/* ver1.2 */
+/* ver1.3 */
 
 DROP TABLE movie_reervation_item;
 
@@ -89,7 +89,7 @@ CREATE TABLE term(
 
 
 CREATE TABLE movie(
-	movie_id varchar(128) NOT NULL,
+	movie_id integer auto_increment NOT NULL,
 	administrator_number integer NOT NULL,
 	movie_name varchar(128) NOT NULL,
 	cast varchar(128) NOT NULL,

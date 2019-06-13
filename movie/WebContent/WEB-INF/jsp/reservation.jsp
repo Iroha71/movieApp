@@ -14,7 +14,7 @@
 	<input type="hidden" name ="screen" value=1>
 	<input type="hidden" name = "sheet" value=1>
 	<input type="hidden" name = "sheet" value=2>
-	<input type = "hidden" name = "sheet" value = 3>
+	<input type = "hidden" name ="sheet" value = 3>
 	<input type="hidden" name = "fee" value=1>
 	<input type="hidden" name = "fee" value=1>
 	<input type="hidden" name = "fee" value=1>

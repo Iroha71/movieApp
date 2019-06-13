@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+予約を取り消しました。
 </body>
 </html>

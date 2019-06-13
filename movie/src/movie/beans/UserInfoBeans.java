@@ -6,6 +6,13 @@ public class UserInfoBeans implements Serializable {
 
 	private String name;
 	private String mail;
+	private int memberNumber;
+	public int getMemberNumber() {
+		return memberNumber;
+	}
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
+	}
 	public String getName() {
 		return name;
 	}

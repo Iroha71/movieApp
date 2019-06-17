@@ -91,6 +91,4 @@ public class MovieListBeans implements Serializable {
 	public void setSheet(int sheet) {
 		this.sheet = sheet;
 	}
-
-
 }

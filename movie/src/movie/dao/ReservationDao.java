@@ -36,7 +36,7 @@ public class ReservationDao extends DaoBase{
 			e.printStackTrace();
 		}
 	}
-  
+
   public void insertReservationItem(Integer MovieTermNumber,String TheaterId,Integer ScreenNumber,
 			Integer MemberNumber,List SheetNumber,List FeeType)throws SQLException{
 
@@ -92,7 +92,7 @@ public class ReservationDao extends DaoBase{
 			}
 		}
 	}
-  
+
 	public List<MovieReservationBeans> select(int memberNumber) {
 		if(con == null) {
 			//戻り方をリストに変更した方がいいのでは？
@@ -152,8 +152,7 @@ public class ReservationDao extends DaoBase{
 		return list;
 	}
 
-	public void delete(int memberNumber,int sheetNumber,int reservationNumber)
-			{
+	public void delete(int memberNumber,int sheetNumber,int reservationNumber){
 		if(con == null) {
 			//接続していない場合は何もしない
 						return;
@@ -179,10 +178,9 @@ public class ReservationDao extends DaoBase{
 					con.close();
 				}
 				catch(SQLException e) {
-public class ReservationDao extends DaoBase{
-
-	
-
-
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }

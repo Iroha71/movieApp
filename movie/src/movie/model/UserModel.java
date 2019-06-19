@@ -38,4 +38,22 @@ public class UserModel {
 		}
 		return loginInfo;
 	}
+
+	public void subscribeUser(String mail,String pass,String name,String birth,String jender,String phone) {
+
+		UserDao userDao = new UserDao();
+
+		try {
+
+			userDao.connect();
+			userDao.subscribeInsert(mail,pass,name,birth,jender,phone);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(userDao != null) {
+				userDao.close();
+				userDao=null;
+			}
+		}
+	}
 }

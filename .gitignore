@@ -1,6 +1,7 @@
 *.class
 context.xml
 Servers/
+MANIFEST.MF
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -47,3 +48,4 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 /.metadata/
+/.recommenders/

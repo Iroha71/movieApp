@@ -24,6 +24,8 @@
 %>
 <div id="list">
 
+<form action="MovieReservationStartContorller" method="get">
+<button type="submit" name="ticket">
 <table border="0">
 	<tr>
 		<td>タイトル : </td>
@@ -46,8 +48,9 @@
 	    	<%}else if(percent ==0){ %>
 	    	    ×</td>
 	</tr>
-
 </table>
+</button>
+</form>
 </div>
 <% }} }%>
 </body>

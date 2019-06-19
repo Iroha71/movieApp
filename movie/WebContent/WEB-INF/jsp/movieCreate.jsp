@@ -11,10 +11,13 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-8">
-				<form action="movieCreate" method="GET">
+				<form action="movieCreate" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<span>映画名</span>
 						<input type="text" name="movieName" class="form-control">
+					</div>
+					<div class="form-group">
+						<input type="file" class="form-control" name="thumbnail">
 					</div>
 					<div class="form-group">
 						<span>公開日</span>

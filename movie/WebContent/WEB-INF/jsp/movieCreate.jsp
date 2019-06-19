@@ -31,7 +31,7 @@
 					</div>
 					<div class="form-group">
 						<span>チケット値段</span>
-						<input type="number" name="feeType" class="form-control">
+						<input type="text" name="feeType" class="form-control">
 					</div>
 					<div class="form-group">
 						<span>解説</span>

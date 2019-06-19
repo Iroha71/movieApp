@@ -36,7 +36,7 @@ public class MovieDao extends DaoBase{
 		}
 		PreparedStatement stmt=null;
 		try {
-			String sql="insert into movie values(?,?,?,?,?,?,?)";
+			String sql="insert into movie(administrator_number,movie_name,cast,directed,release_start_date,release_finish_date,movie_detail) values(?,?,?,?,?,?,?)";
 			stmt=con.prepareStatement(sql);
 			stmt.setInt(1, adminId);
 			stmt.setString(2, movieName);
@@ -61,7 +61,6 @@ public class MovieDao extends DaoBase{
 			}
 		}
 	}
-
 	public int findMovie(int adminId,String movieName) {
 		if(con==null) {
 			return 0;

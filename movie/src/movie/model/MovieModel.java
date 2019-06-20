@@ -34,4 +34,32 @@ public class MovieModel {
 			return list;
 		}
 
+		public List<MovieListBeans> getReserveList(){
+			List<MovieListBeans> reservelist = new ArrayList<MovieListBeans>();
+
+			MovieDao dao=new MovieDao();
+
+			try{
+				///////////////////////////////////
+				//DBの接続
+				dao.connect();
+				///////////////////////////////////
+				//一覧の取得
+				reservelist=dao.getReserveList();
+
+			}catch(Exception e) {
+			//エラー発生した場合にコンソールにログを出力する
+				e.printStackTrace();
+			}
+			finally {
+				//接続（コネクション）を閉じる
+				dao.close();
+
+			}
+
+			return reservelist;
+		}
+
+
+
 }

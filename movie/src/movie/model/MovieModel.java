@@ -50,13 +50,13 @@ public class MovieModel {
 		}
 	}
 
-	public void createMovie(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail) {
+	public void createMovie(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail,String thumbnail) {
 		MovieDao movieDao=new MovieDao();
 		MovieFeeDao movieFeeDao=new MovieFeeDao();
 		try {
 			adminId=1;
 			movieDao.connect();
-			movieDao.insert(adminId, movieName, new java.sql.Date(releaseDate.getTime()), new java.sql.Date(finishDate.getTime()), directed, cast, fee_type,movieDetail);
+			movieDao.insert(adminId, movieName, new java.sql.Date(releaseDate.getTime()), new java.sql.Date(finishDate.getTime()), directed, cast, fee_type,movieDetail,thumbnail);
 			movieFeeDao.connect();
 			movieFeeDao.insert(adminId, movieName,fee_type);
 		}catch(Exception e) {

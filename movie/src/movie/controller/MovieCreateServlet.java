@@ -28,7 +28,8 @@ public class MovieCreateServlet extends HttpServlet {
 		Part part=req.getPart("thumbnail");
 		String fileName=getFileName(part);
 		part.write(getServletContext().getRealPath("WEB-INF")+"/"+fileName);
-		System.out.println(getServletContext().getRealPath("WEB-INF")+"/"+fileName);
+		String thumbnail=getServletContext().getRealPath("WEB-INF")+"/"+fileName;
+
 		HttpSession session=req.getSession();
 		//beans化
 		int loginInfo=1;
@@ -48,7 +49,7 @@ public class MovieCreateServlet extends HttpServlet {
 		String detail=Sanitize.sanitizing(req.getParameter("movieDetail"));
 		String fee_type=Sanitize.sanitizing(req.getParameter("feeType"));
 		MovieModel movieModel=new MovieModel();
-		movieModel.createMovie(loginInfo, movieName, releaseDate, finishDate, directed, cast, fee_type, detail);
+		movieModel.createMovie(loginInfo, movieName, releaseDate, finishDate, directed, cast, fee_type, detail,thumbnail);
 		resp.sendRedirect("movieCreateFinish");
 	}
 

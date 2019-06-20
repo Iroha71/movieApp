@@ -93,13 +93,13 @@ public class MovieDao extends DaoBase {
 			}
 		}
 
-		public void insert(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail) {
+		public void insert(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail,String thumbnail) {
 			if(con==null) {
 				return;
 			}
 			PreparedStatement stmt=null;
 			try {
-				String sql="insert into movie(administrator_number,movie_name,cast,directed,release_start_date,release_finish_date,movie_detail) values(?,?,?,?,?,?,?)";
+				String sql="insert into movie(administrator_number,movie_name,cast,directed,release_start_date,release_finish_date,movie_detail,thumbnail) values(?,?,?,?,?,?,?,?)";
 				stmt=con.prepareStatement(sql);
 				stmt.setInt(1, adminId);
 				stmt.setString(2, movieName);
@@ -108,6 +108,7 @@ public class MovieDao extends DaoBase {
 				stmt.setDate(5, releaseDate);
 				stmt.setDate(6, finishDate);
 				stmt.setString(7, movieDetail);
+				stmt.setString(8, thumbnail);
 				stmt.executeUpdate();
 			}catch(SQLException e) {
 				e.printStackTrace();

@@ -5,13 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="lib/bootstrap.min.css">
+<link rel="stylesheet" href="css/userLogin.css">
 <title>ログイン画面</title>
 </head>
 <body>
 <%String error=(String)request.getParameter("error"); %>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-8">
+			<div class="col-lg-4">
 				<%if(error!=null && error.equals("mistake")){ %>
 					<p>メールアドレスまたはパスワードが間違っています</p>
 				<%} %>

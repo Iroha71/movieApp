@@ -1,5 +1,7 @@
 package movie.dao;
 
+
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,5 +77,37 @@ public class UserDao extends DaoBase{
 			}
 		}
 		return loginInfo;
+	}
+
+	public void subscribeInsert(String mail,String pass,String name,String birth,String jender,String phone)
+		throws SQLException{
+
+		if(con == null) {
+			return;
+		}
+
+		PreparedStatement subscribe = null;
+		//生年月日をString型からDate型へ変換
+		Date birthday = Date.valueOf(birth);
+
+		try {
+			//会員へINSERT文を発行
+			String sql = "insert into member(member_mail,member_name,"
+					+ "member_birthday,member_phone,member_sei,member_pass) "
+					+ "values(?,?,?,?,?,?)";
+
+			subscribe = con.prepareStatement(sql);
+
+			subscribe.setString(1, mail);
+			subscribe.setString(2, name);
+			subscribe.setDate(3, birthday);
+			subscribe.setString(4,phone);
+			subscribe.setString(5, jender);
+			subscribe.setString(6, pass);
+
+			subscribe.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,17 +1,22 @@
 package movie.beans;
 
-import java.io.Serializable;
-
-public class UserInfoBeans implements Serializable {
-
-	private String name;
-	private String mail;
-	private int memberNumber;
-	public int getMemberNumber() {
-		return memberNumber;
+public class UserInfoBeans {
+	String mail;
+	String pass;
+	String name;
+	String sei;
+	String phone;
+	public String getMail() {
+		return mail;
 	}
-	public void setMemberNumber(int memberNumber) {
-		this.memberNumber = memberNumber;
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 	public String getName() {
 		return name;
@@ -19,12 +24,17 @@ public class UserInfoBeans implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getMail() {
-		return mail;
+	public String getSei() {
+		return sei;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setSei(String sei) {
+		this.sei = sei;
 	}
-
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 }

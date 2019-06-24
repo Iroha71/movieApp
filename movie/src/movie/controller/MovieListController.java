@@ -35,5 +35,4 @@ public class MovieListController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/movielist.jsp");
 		dispatcher.forward(request, response);
 	}
-
-	}
+}

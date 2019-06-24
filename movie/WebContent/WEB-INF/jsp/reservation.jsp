@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+	String []sheets = (String[])request.getAttribute("sheets");
+%>
 <form action = "MovieReservationController" method = "get">
 	<input type="hidden"  name="member"value=1>
 	<input type="hidden" name="term" value = 1>
@@ -14,7 +17,7 @@
 	<input type="hidden" name ="screen" value=1>
 	<input type="hidden" name = "sheet" value=1>
 	<input type="hidden" name = "sheet" value=2>
-	<input type = "hidden" name ="sheet" value = 3>
+	<input type = "hidden" name ="sheet" value = 3><%=sheets[3] %>
 	<input type="hidden" name = "fee" value=1>
 	<input type="hidden" name = "fee" value=1>
 	<input type="hidden" name = "fee" value=1>

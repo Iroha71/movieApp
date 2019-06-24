@@ -6,7 +6,7 @@ import java.util.List;
 import movie.beans.MovieReservationBeans;
 import movie.dao.ReservationDao;
 
-public class ReservationMovieModel {
+public class ReservationMovieModel{
 	public List<MovieReservationBeans> getList(int memberNuber) {
 		List<MovieReservationBeans> list = new ArrayList<MovieReservationBeans>();
 

@@ -16,7 +16,7 @@
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
 				<div v-if="isLoad">
-
+					<jsp:include page="loading/loading.jsp" />
 				</div>
 				<%if(error!=null && error.equals("mistake")){ %>
 					<p>メールアドレスまたはパスワードが間違っています</p>

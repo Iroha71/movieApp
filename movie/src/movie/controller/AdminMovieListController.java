@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import movie.beans.MovieListBeans;
 import movie.model.MovieModel;
 
-@WebServlet("/top")
-public class MovieListController extends HttpServlet {
-
+@WebServlet("/admimtop")
+public class AdminMovieListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 												throws ServletException, IOException {
@@ -32,7 +31,9 @@ public class MovieListController extends HttpServlet {
 		//映画の一覧をリクエストにセット
 		request.setAttribute("list", list);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/movielist.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/adminMovieList.jsp");
 		dispatcher.forward(request, response);
 	}
+
+
 }

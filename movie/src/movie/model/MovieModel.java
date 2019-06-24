@@ -33,5 +33,19 @@ public class MovieModel {
 
 			return list;
 		}
+		public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail) {
+			MovieDao moviedao = new MovieDao();
+				try {
+					moviedao.connect();
+
+					moviedao.update(movieId,movieName, startDate, finishDate, cast,directed, detail);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					if(moviedao != null) {
+						moviedao.close();
+					}
+				}
+		}
 
 }

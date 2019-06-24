@@ -95,7 +95,7 @@ public class ReservationDao extends DaoBase{
 
 	public List<MovieReservationBeans> select(int memberNumber) {
 		if(con == null) {
-			//戻り方をリストに変更した方がいいのでは？
+
 			return null;
 	}
 		MovieReservationBeans beans;
@@ -116,7 +116,7 @@ public class ReservationDao extends DaoBase{
 					"INNER JOIN theater ON screen.theater_id = theater.theater_id "+
 					"INNER JOIN movie_reservation_item ON movie_reservation_item.reservation_number = movie_reservation.reservation_number " +
 					"Where movie_reservation.member_number = ?;");
-			//Column 'movie_id' in field list is ambiguous?
+
 
 			stmt.setInt(1,memberNumber);
 			rs=stmt.executeQuery();

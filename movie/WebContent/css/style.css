@@ -1,8 +1,8 @@
 @charset "UTF-8";
-html,body,.container-fluid,div[class^='col-']{
+html,body,.container-fluid,div[class^="col-"]{
 	height: 100%;
 }
-body{
+body>*{
 	position: relative;
 }
 .center{

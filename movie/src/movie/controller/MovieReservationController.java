@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie.model.ReserveModel;
+import movie.model.reserveModel;
 
 @WebServlet("/MovieReservationController")
 public class MovieReservationController extends HttpServlet {
@@ -29,7 +29,7 @@ public class MovieReservationController extends HttpServlet {
 
 		String[] sheets = request.getParameterValues("sheet");
 		String[] fees = request.getParameterValues("fee");
-		
+
 		//
 		for(String sheet : sheets) {
 			SheetNumber.add(Integer.parseInt(sheet));
@@ -38,7 +38,7 @@ public class MovieReservationController extends HttpServlet {
 			FeeType.add(fee);
 		}
 		//映画予約するreserveModelを呼び出す
-		ReserveModel reserve = new ReserveModel();
+		reserveModel reserve = new reserveModel();
 
 		reserve.reserveMovie(MovieTermNumber, TheaterId, ScreenNumber, MemberNumber, SheetNumber, FeeType);
 

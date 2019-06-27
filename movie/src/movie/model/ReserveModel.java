@@ -4,7 +4,7 @@ import java.util.List;
 
 import movie.dao.ReservationDao;
 
-public class ReserveModel {
+public class reserveModel {
 	public void reserveMovie(Integer MovieTermNumber,String TheaterId,Integer ScreenNumber,
 			Integer MemberNumber,List SheetNumber,List FeeType) {
 

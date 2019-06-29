@@ -25,7 +25,8 @@ td{
 	text-align: center;
 }
 .reserve-list{
-	transition: .3s
+	transition: .3s;
+	cursor: pointer;
 }
 .reserve-list:hover{
 	background-color: #008040;

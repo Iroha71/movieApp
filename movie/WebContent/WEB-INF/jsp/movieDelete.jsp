@@ -34,9 +34,9 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 					<th>上映時間</th>
 				</tr>
 				<% for(ReservationBeans beans:list){ %>
-				<tr class="reserve-list">
+				<tr class="reserve-list" onClick="toggleCheckBox(<%=beans.getReservationNumber() %>)">
 					<td>
-						<input type="checkbox" name="reservation" value="<% beans.getReservationNumber();%>">
+						<input type="checkbox" name="reservation" value="<% beans.getReservationNumber();%>" id="check<%=beans.getReservationNumber()%>">
 					</td>
 					<td>
 						<input type="hidden" name = "moviename" value=<%=beans.getMovieName() %> >
@@ -64,4 +64,10 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 	</div>
 </article>
 </body>
+<script>
+toggleCheckBox=function(idx){
+	const checkBox=document.getElementById("check"+idx);
+	checkBox.checked=!checkBox.checked;
+}
+</script>
 </html>

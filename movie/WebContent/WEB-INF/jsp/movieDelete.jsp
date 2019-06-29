@@ -3,6 +3,7 @@
     <%@ page import="movie.beans.UserInfoBeans" %>
     <%@ page import="movie.beans.ReservationBeans" %>
     <%@ page import="java.util.List" %>
+    <%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,9 @@
 </head>
 <body class="container-fluid">
 <%
- List<ReservationBeans>list = (List<ReservationBeans>)request.getAttribute("list");
+List<ReservationBeans>list = (List<ReservationBeans>)request.getAttribute("list");
+SimpleDateFormat sdf=new SimpleDateFormat("MM月dd日 HH:mm:ss");
+SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 %>
 <article class="row">
 	<div class="col-sm-2"></div>
@@ -46,10 +49,10 @@
 					 	<%=beans.getSheetNumber()%></td>
 					<td>
 						<input type="hidden" name = "termstart" value=<%=beans.getTermStart()%>>
-					 	<%=beans.getTermStart() %>
+					 	<%=sdf.format(beans.getTermStart()) %>
 					 	-
 					 	<input type="hidden" name = "termfinish" value=<%=beans.getTermFinish()%>>
-					 	<%=beans.getTermFinish() %>
+					 	<%=sdfFinishDate.format(beans.getTermFinish()) %>
 					 	<input type="hidden" name ="membernumber" value=<%=beans.getMemberNumber() %>>
 			 			<input type="hidden" name ="reservationnumber" value=<%=beans.getReservationNumber() %>>
 					</td>

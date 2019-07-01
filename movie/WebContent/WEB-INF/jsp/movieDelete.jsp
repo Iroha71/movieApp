@@ -24,7 +24,7 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 <article class="row">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
-		<form action="delete" method="GET">
+		<form action="delete" method="GET" id="deleteForm">
 			<p>取り消す予約を選択してください</p>
 			<table border="1">
 				<tr>
@@ -62,13 +62,46 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 				</tr>
 				<%} %>
 			</table>
-			<input type="button" value="予約取り消し" class="btn btn-danger d-block" @click="showModal">
+			<input type="button" value="予約取り消し" class="btn btn-danger d-block" @click="showModal(true)">
 		</form>
 	</div>
 </article>
 <section class="modal-area col-sm-12" v-if="isModal">
 	<div class="check-modal center">
-		<button type="submit"></button>
+		この予約を取り消しますか？
+		<table>
+			<tr>
+				<th>タイトル</th>
+				<th>チケット料金</th>
+				<th>座席番号</th>
+				<th>上映時間</th>
+			</tr>
+			<% for(ReservationBeans beans:list){ %>
+			<tr class="reserve-list" onClick="toggleCheckBox(<%=beans.getReservationNumber() %>)">
+				<td>
+					<input type="hidden" name = "moviename" value=<%=beans.getMovieName() %> >
+				 	<%=beans.getMovieName()%></td>
+				<td>
+					<input type="hidden" name = "feebase" value =<%=beans.getFeeBase() %>>
+				 	￥<%=beans.getFeeBase() %>
+				</td>
+				<td>
+					<input type="hidden" name = "sheetnumber" value=<%= beans.getSheetNumber()%>>
+				 	<%=beans.getSheetNumber()%>
+				</td>
+				<td>
+					<input type="hidden" name = "termstart" value="<%=beans.getTermStart()%>">
+				 	<%=sdf.format(beans.getTermStart()) %>
+				 	-
+				 	<input type="hidden" name = "termfinish" value="<%=beans.getTermFinish()%>">
+				 	<%=sdfFinishDate.format(beans.getTermFinish()) %>
+				 	<input type="hidden" name ="membernumber" value=<%=beans.getMemberNumber() %>>
+		 			<input type="hidden" name ="reservationnumber" value=<%=beans.getReservationNumber() %>>
+				</td>
+			</tr>
+			<%} %>
+		</table>
+		<button type="button" @click="submitDelete">取り消し</button>
 	</div>
 </section>
 </div>
@@ -78,15 +111,19 @@ toggleCheckBox=function(idx){
 	const checkBox=document.getElementById('check'+idx);
 	checkBox.checked=!checkBox.checked;
 }
-
 var app=new Vue({
 	el: '#app',
 	data:{
-		isModal: false
+		isModal: false,
+		reserveId: []
 	},
 	methods:{
-		showModal:function(){
-			this.isModal=true
+		showModal:function(showModal){
+			this.isModal=showModal
+		},
+		submitDelete:function(){
+			const form=document.getElementById('deleteForm');
+			form.submit();
 		}
 	}
 })

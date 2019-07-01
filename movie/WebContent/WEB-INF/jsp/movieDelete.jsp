@@ -15,6 +15,7 @@
 <title>映画予約取り消し</title>
 </head>
 <body class="container-fluid">
+<div id='app'>
 <%
 List<ReservationBeans>list = (List<ReservationBeans>)request.getAttribute("list");
 SimpleDateFormat sdf=new SimpleDateFormat("MM月dd日 HH:mm:ss");
@@ -43,15 +44,17 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 					 	<%=beans.getMovieName()%></td>
 					<td>
 						<input type="hidden" name = "feebase" value =<%=beans.getFeeBase() %>>
-					 	￥<%=beans.getFeeBase() %></td>
+					 	￥<%=beans.getFeeBase() %>
+					</td>
 					<td>
 						<input type="hidden" name = "sheetnumber" value=<%= beans.getSheetNumber()%>>
-					 	<%=beans.getSheetNumber()%></td>
+					 	<%=beans.getSheetNumber()%>
+					</td>
 					<td>
-						<input type="hidden" name = "termstart" value=<%=beans.getTermStart()%>>
+						<input type="hidden" name = "termstart" value="<%=beans.getTermStart()%>">
 					 	<%=sdf.format(beans.getTermStart()) %>
 					 	-
-					 	<input type="hidden" name = "termfinish" value=<%=beans.getTermFinish()%>>
+					 	<input type="hidden" name = "termfinish" value="<%=beans.getTermFinish()%>">
 					 	<%=sdfFinishDate.format(beans.getTermFinish()) %>
 					 	<input type="hidden" name ="membernumber" value=<%=beans.getMemberNumber() %>>
 			 			<input type="hidden" name ="reservationnumber" value=<%=beans.getReservationNumber() %>>
@@ -59,15 +62,33 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 				</tr>
 				<%} %>
 			</table>
-			<input type="submit" value="予約取り消し" class="btn btn-danger d-block">
+			<input type="button" value="予約取り消し" class="btn btn-danger d-block" @click="showModal">
 		</form>
 	</div>
 </article>
+<section class="modal-area col-sm-12" v-if="isModal">
+	<div class="check-modal center">
+		<button type="submit"></button>
+	</div>
+</section>
+</div>
 </body>
 <script>
 toggleCheckBox=function(idx){
-	const checkBox=document.getElementById("check"+idx);
+	const checkBox=document.getElementById('check'+idx);
 	checkBox.checked=!checkBox.checked;
 }
+
+var app=new Vue({
+	el: '#app',
+	data:{
+		isModal: false
+	},
+	methods:{
+		showModal:function(){
+			this.isModal=true
+		}
+	}
+})
 </script>
 </html>

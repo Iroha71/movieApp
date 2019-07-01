@@ -1,13 +1,15 @@
 package movie.model;
 
+import movie.beans.AdminBeans;
+import movie.beans.UserInfoBeans;
 import movie.dao.UserDao;
 
 public class UserModel {
 	//ビーンズを返す
-	public String login(String mail,String password) {
+	public UserInfoBeans login(String mail,String password) {
 		UserDao userDao=new UserDao();
-		//ビーンズに変更
-		String loginInfo=null;
+
+		UserInfoBeans loginInfo = new UserInfoBeans();
 		try {
 			userDao.connect();
 			loginInfo=userDao.getBy(mail, password);
@@ -22,9 +24,9 @@ public class UserModel {
 		return loginInfo;
 	}
 
-	public String loginAdmin(String mail,String password) {
+	public AdminBeans loginAdmin(String mail,String password) {
 		UserDao userDao=new UserDao();
-		String loginInfo=null;
+		AdminBeans loginInfo=new AdminBeans();
 		try {
 			userDao.connect();
 			loginInfo=userDao.getAdmin(mail, password);

@@ -6,10 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import movie.beans.AdminBeans;
+import movie.beans.UserInfoBeans;
+
 public class UserDao extends DaoBase{
-	public String getBy(String mail,String password)throws SQLException{
+	public UserInfoBeans getBy(String mail,String password)throws SQLException{
 		//ビーンズを使う
-		String loginInfo=null;
+		UserInfoBeans loginInfo=null;
 		if(con==null) {
 			return null;
 		}
@@ -22,7 +25,14 @@ public class UserDao extends DaoBase{
 			stmt.setString(2, password);
 			rs=stmt.executeQuery();
 			while(rs.next()) {
-				loginInfo="ログイン";
+				loginInfo=new UserInfoBeans();
+
+				loginInfo.setMemberNumber(rs.getInt("member_number"));
+				loginInfo.setMemberMail(rs.getString("member_mail"));
+				loginInfo.setMemberName(rs.getString("member_name"));
+				loginInfo.setMemberSei(rs.getString("member_sei"));
+				loginInfo.setMemberPhone(rs.getString("member_phone"));
+				loginInfo.setMemberPass(rs.getString("member_pass"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -44,8 +54,14 @@ public class UserDao extends DaoBase{
 		return loginInfo;
 	}
 
-	public String getAdmin(String mail,String password)throws SQLException{
-		String loginInfo=null;
+	private int getInt(String string) {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
+	}
+
+	public AdminBeans getAdmin(String mail,String password)throws SQLException{
+
+		AdminBeans loginInfo = null;
 		if(con==null) {
 			return null;
 		}
@@ -58,7 +74,14 @@ public class UserDao extends DaoBase{
 			stmt.setString(2, password);
 			rs=stmt.executeQuery();
 			while(rs.next()) {
-				loginInfo="ログイン";
+
+				loginInfo = new AdminBeans();
+
+				loginInfo.setAdminNumber(rs.getInt("administrator_number"));
+				loginInfo.setAdminMail(rs.getString("administrator_mail"));
+				loginInfo.setAdminName(rs.getString("administrator_name"));
+				loginInfo.setAdminPass(rs.getString("administrator_pass"));
+
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

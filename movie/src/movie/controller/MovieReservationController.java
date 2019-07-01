@@ -29,7 +29,7 @@ public class MovieReservationController extends HttpServlet {
 
 		String[] sheets = request.getParameterValues("sheet");
 		String[] fees = request.getParameterValues("fee");
-		
+
 		//
 		for(String sheet : sheets) {
 			SheetNumber.add(Integer.parseInt(sheet));

@@ -3,12 +3,12 @@ package movie.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import movie.beans.MovieReservationBeans;
+import movie.beans.ReservationBeans;
 import movie.dao.ReservationDao;
 
 public class ReservationMovieModel{
-	public List<MovieReservationBeans> getList(int memberNuber) {
-		List<MovieReservationBeans> list = new ArrayList<MovieReservationBeans>();
+	public List<ReservationBeans> getList(int memberNuber) {
+		List<ReservationBeans> list = new ArrayList<ReservationBeans>();
 
 		ReservationDao Reservationdao = new ReservationDao();
 
@@ -26,7 +26,7 @@ public class ReservationMovieModel{
 				Reservationdao.close();
 			}
 		return list;
-		}
+	}
 
 
 	public void delete(int memberNumber , int sheetNumber ,int reservationNumber) {

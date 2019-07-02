@@ -66,7 +66,7 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 		</form>
 	</div>
 </article>
-<section class="modal-area col-sm-12" v-if="isModal">
+<section class="modal-area col-sm-12 center" v-if="isModal">
 	<div class="check-modal center">
 		この予約を取り消しますか？
 		<table>
@@ -102,6 +102,7 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 			<%} %>
 		</table>
 		<button type="button" @click="submitDelete">取り消し</button>
+		<button type="button" @click="showModal(false)">キャンセル</button>
 	</div>
 </section>
 </div>

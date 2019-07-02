@@ -52,13 +52,20 @@ public class MovieReservationStartController extends HttpServlet {
 			session.setAttribute("MemberNumber", MemberNumber);
 			session.setAttribute("flag", flag);
 
-		}
-
 			String[] sheets = reserve.property();
 			request.setAttribute("sheets", sheets);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/reservation.jsp");
-
+			RequestDispatcher dispatcher=request.getRequestDispatcher("WEB-INF/jsp/reservation.jsp");
 			dispatcher.forward(request,response);
+
+		}else {
+			String[] sheets = reserve.property();
+			request.setAttribute("sheets", sheets);
+			RequestDispatcher dispatcher=request.getRequestDispatcher("WEB-INF/jsp/reservation.jsp");
+			dispatcher.forward(request,response);
+		}
+
+
+
 
 	}
 }

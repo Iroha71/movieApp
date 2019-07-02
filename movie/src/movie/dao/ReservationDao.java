@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import movie.beans.ReservationBeans;
+import movie.beans.MovieReservationBeans;
 
 public class ReservationDao extends DaoBase{
   public void insertReservation(Integer MovieTermNumber,String TheaterId,Integer ScreenNumber,
@@ -93,13 +93,13 @@ public class ReservationDao extends DaoBase{
 		}
 	}
 
-	public List<ReservationBeans> select(int memberNumber) {
+	public List<MovieReservationBeans> select(int memberNumber) {
 		if(con == null) {
 
 			return null;
 	}
-		ReservationBeans beans;
-		List<ReservationBeans>list = new ArrayList<ReservationBeans>();
+		MovieReservationBeans beans;
+		List<MovieReservationBeans>list = new ArrayList<MovieReservationBeans>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
@@ -122,7 +122,7 @@ public class ReservationDao extends DaoBase{
 			rs=stmt.executeQuery();
 
 		while(rs.next()) {
-			beans = new ReservationBeans();
+			beans = new MovieReservationBeans();
 
 			beans.setMovieId(rs.getInt("movie.movie_id"));
 			beans.setMovieName(rs.getString("movie.movie_name"));

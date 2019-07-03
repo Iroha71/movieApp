@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="movie.beans.UserInfoBeans" %>
-    <%@ page import="movie.beans.MovieReservationBeans" %>
+    <%@ page import="movie.beans.ReservationBeans" %>
     <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -11,13 +11,13 @@
 </head>
 <body>
 <%
- List<MovieReservationBeans>list = (List<MovieReservationBeans>)request.getAttribute("list");
+ List<ReservationBeans>list = (List<ReservationBeans>)request.getAttribute("list");
 %>
 予約取り消しますか。
 <article>
 <form action="delete" method="get">
 	<table>
-	<% for(MovieReservationBeans beans:list){ %>
+	<% for(ReservationBeans beans:list){ %>
 	<tr>
 	 <th><input type="checkbox" name="reservation" value="<% beans.getReservationNumber();%>"></th>
 	 <td><input type="hidden" name = "moviename" value=<%=beans.getMovieName() %> >

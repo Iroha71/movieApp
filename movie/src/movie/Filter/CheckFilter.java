@@ -71,7 +71,7 @@ public class CheckFilter implements Filter{
 			}else{
 				chain.doFilter(request, response);
 			}
-			request.setCharacterEncoding("UTF-8");
+			//request.setCharacterEncoding("UTF-8");
 		}
 
 		@Override

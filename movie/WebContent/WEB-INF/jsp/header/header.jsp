@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="css/style.css">
+<%@ page import="movie.beans.UserInfoBeans" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
+<% UserInfoBeans beans=(UserInfoBeans)request.getAttribute("loginInfo");%>
 <header class="header">
+    <div>
 		<img src="img/logo.png" alt="ロゴ">
+		<p><%=beans.getName() %></p>
 		<nav class="global-nav">
 		  <ul class="global-nav__list">
 			<li class="global-nav__item"><a href="">メニュー1</a></li>
@@ -18,7 +24,8 @@
 		  <span class="hamburger__line hamburger__line--3"></span>
 		</div>
 		<div class="black-bg" id="js-black-bg"></div>
-	  </header>
+    </div>
+</header>
 
 <script type="text/javascript">
 function toggleNav() {

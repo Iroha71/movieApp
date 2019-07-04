@@ -1,0 +1,32 @@
+@charset "UTF-8";
+.row{
+	height: 80%;
+}
+table{
+	width: 100%;
+	height: 100%;
+	text-align:center;
+}
+td{
+	width: 10%;
+	padding: 5px;
+	background-color: #575757;
+}
+button{
+	border: none;
+}
+
+.sheet-div{
+	background-color: #edd84f;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.active-sheet:hover{
+	background-color: blue;
+}
+.disable-sheet{
+	background: inherit;
+	color: rgba(255,255,255,0);
+}

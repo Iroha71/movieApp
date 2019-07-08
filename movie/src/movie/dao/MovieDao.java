@@ -83,8 +83,10 @@ public class MovieDao extends DaoBase {
 	        try{
 	  			///////////////////////////////////
 	  			//SELECT文の発行
-	  			stmt = con.prepareStatement("SELECT movie_name,COUNT(*) as count FROM (movie INNER JOIN movie_term ON movie.movie_id=movie_term.movie_id) "
+	  			stmt = con.prepareStatement("SELECT movie_name,COUNT(*) as count ,sheet_total,release_start_date,release_finish_date,cast,movie_detail,directed "
+	  					+ "FROM (movie INNER JOIN movie_term ON movie.movie_id=movie_term.movie_id) "
 	  					+ "INNER JOIN movie_reservation ON movie_term.movie_term_number=movie_reservation.movie_term_number "
+	  					+ "INNER JOIN screen ON movie_reservation.screen_number = screen.screen_number AND movie_reservation.theater_id = screen.theater_id "
 	  					+ "INNER JOIN movie_reservation_item ON movie_reservation.reservation_number=movie_reservation_item.reservation_number "
 	  					+ "GROUP BY movie_name");
 

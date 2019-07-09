@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie.beans.FeeBeans;
 import movie.model.MovieModel;
 
 @WebServlet("/movieCreateStart")
@@ -20,7 +21,7 @@ public class MovieCreateStartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		MovieModel movieModel = new MovieModel();
-		List<String> feeType = new ArrayList<String>();
+		List<FeeBeans> feeType = new ArrayList<FeeBeans>();
 
 		feeType = movieModel.getFee();
 		req.setAttribute("feeType", feeType);

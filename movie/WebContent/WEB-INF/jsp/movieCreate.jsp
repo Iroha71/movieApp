@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "movie.beans.FeeBeans" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 </head>
 <body>
 <%
-	List<String>feeType = (List<String>)request.getAttribute("feeType");
+	List<FeeBeans>feeType = (List<FeeBeans>)request.getAttribute("feeType");
 %>
 	<div class="container-fluid">
 		<div class="row">
@@ -63,8 +64,8 @@
 					</div>
 					<div class="form-group">
 						<select name = "name" class="feeSelect">
-							<%for(String type : feeType){ %>
-								<option value="<%=type%>"><%=type %></option>
+							<%for(FeeBeans feeBeans : feeType){ %>
+								<option value="<%=feeBeans.getFeeType()%>"><%=feeBeans.getFeeType()%>:<%=feeBeans.getFee() %>円</option>
 							<%} %>
 						</select>
 					</div>

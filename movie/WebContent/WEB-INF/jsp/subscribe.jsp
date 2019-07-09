@@ -12,7 +12,9 @@
 <body>
 <form action="subscribe" method = "get">
 	<table border="0" class="mx-auto">
-		<p>会員登録</p>
+
+		<p class="">会員登録</p>
+
 		 <tr>
 		 	<div class="form-group">
 		 	<td>メールアドレス </td> <td><input type="text" name="mail" size="50" class="form-control"></td>
@@ -21,7 +23,7 @@
 
 		 <tr>
 		 	<div class="form-group">
-		 	<td>パスワード </td><td><input type="text" name="pass" size="50" class="form-control"></td>
+		 	<td>パスワード </td><td><input type="password" name="pass" size="50" class="form-control"></td>
 		 	</div>
 		 </tr>
 
@@ -52,8 +54,28 @@
 
 	</table>
 	<div class="form-group">
-	<input type="submit" name="button" value="会員登録" class="btn-primary">
+	<input type="submit" name="button" value="会員登録" class="btn d-block">
 	</div>
 </form>
+<section class="modal-area col-sm-12 center" v-if="isModal">
+	<div class="check-modal center">
+		この会員情報で確定しますか？
+		<table>
+			<tr>
+				<th>メールアドレス</th>
+				<th>パスワード</th>
+				<th>名前</th>
+				<th>誕生日</th>
+				<th>性別</th>
+				<th>電話番号</th>
+			</tr>
+
+
+		</table>
+		<button type="button" @click="submitDelete">登録情報を確認しました。</button>
+		<button type="button" @click="showModal(false)">キャンセル</button>
+	</div>
+</section>
+
 </body>
 </html>

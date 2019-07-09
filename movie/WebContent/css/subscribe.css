@@ -1,1 +1,36 @@
 @charset "UTF-8";
+p{
+	position:relative;
+	font-size:30px;
+	top:25px;
+	left:130px;
+	padding-bottom:35px;
+	color:#edd84f;
+}
+td{
+	padding-right:25px;
+}
+input[type="submit"]{
+	margin-top:30px;
+	color:#FFFFFF;
+	background-color:#edd84f;
+}
+input[type="radio"]{
+	margin-right:80px;
+	margin-left:50px;
+}
+.d-block{
+		margin:auto;
+
+}
+.modal-area{
+	background-color: rgba(255,255,255,0.7);
+	height: 100%;
+	width:100%;
+	z-index: 2;
+	position: absolute;
+}
+.check-modal{
+	width: 70%;
+	height: 60%;
+}

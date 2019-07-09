@@ -109,4 +109,24 @@ public class MovieModel {
 
 		return reservelist;
 	}
+
+	public List<String>getFee(){
+
+		List<String>feeType = new ArrayList<String>();
+
+		MovieDao dao = new MovieDao();
+
+		try {
+			dao.connect();
+
+			feeType = dao.getFee();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			dao.close();
+		}
+
+		return feeType;
+	}
 }

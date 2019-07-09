@@ -122,6 +122,39 @@ public class MovieDao extends DaoBase {
 	  		}
 	  		return reservelist;
 	}
+	public List<String> getFee(){
+
+		List<String> feeType = new ArrayList<String>();
+		PreparedStatement stmt=null;
+	  	ResultSet rs=null;
+	  	String sql = "SELECT fee_type from fee";
+	  	try {
+	  		stmt = con.prepareStatement(sql);
+
+	  		rs = stmt.executeQuery();
+
+	  		while(rs.next()) {
+
+	  			feeType.add(rs.getString("fee_type"));
+
+	  		}
+	  	}catch(SQLException e) {
+	  		e.printStackTrace();
+	  	}
+
+	  	finally{
+	  		if(con != null) {
+	  			try {
+	  				con.close();
+	  			}catch(SQLException e) {
+	  				e.printStackTrace();
+	  			}
+	  		}
+	  	}
+
+	  	return feeType;
+
+	}
     //UPDATE用
     public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail) {
     	if(con == null) {

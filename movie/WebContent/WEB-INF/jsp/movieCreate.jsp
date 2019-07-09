@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +11,9 @@
 <title>映画情報登録</title>
 </head>
 <body>
+<%
+	List<String>feeType = (List<String>)request.getAttribute("feeType");
+%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class = "col-4">
@@ -57,7 +62,11 @@
 						<input type="text" name="cast" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="text" name="feeType" class="form-control">
+						<select name = "name" class="feeSelect">
+							<%for(String type : feeType){ %>
+								<option value="<%=type%>"><%=type %></option>
+							<%} %>
+						</select>
 					</div>
 					<div class="form-group">
 						<textarea name="movieDetail" class="form-control"></textarea>

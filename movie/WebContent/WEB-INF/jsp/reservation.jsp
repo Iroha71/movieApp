@@ -22,13 +22,9 @@
 		<input type="hidden" name="term" value = 1>
 		<input type="hidden" name="theater" value=1>
 		<input type="hidden" name ="screen" value=1>
-		<input type="hidden" name = "fee" value=1>
-		<input type="hidden" name = "fee" value=1>
-		<input type="hidden" name = "fee" value=1>
-		<input type ="submit" name="button" value="予約する">
-	</form>
-
+		<input type="hidden" name = "fee" value=1 v-model="reserveSheetType" id="inputFee">
 		<input type="text" name = "sheet" v-model="reserveSheetNum" id="inputSheet">
+	</form>
 	<article class="row navbar">
 		<div class="col-sm-4 select-sheet">
 			座席選択
@@ -100,6 +96,7 @@ var app=new Vue({
 		sheets: [],
 		isModal: false,
 		reserveSheetNum: [],
+		reserveSheetType: [],
 	},
 	methods:{
 		showModal:function(isShow){
@@ -118,17 +115,18 @@ var app=new Vue({
 					tempReserveNum.push(this.reserveSheet[i]['num'])
 				}
 				const reserveIndex=tempReserveNum.indexOf(index);
-				console.log(reserveIndex)
 				if(reserveIndex>=0){
 					/* チケット種類変更か予約取り消しか? */
 					if(this.ticketType==="取り消し"){
 						console.log("取り消し処理")
 						this.reserveSheet.splice(reserveIndex,1);
 						this.reserveSheetNum.splice(reserveIndex,1);
+						this.reserveSheetType.splice(reserveIndex,1);
 						console.log("削除");
 					}else{
 						console.log("予約処理")
 						this.reserveSheet[reserveIndex]['type']=this.ticketType;
+						this.reserveSheetType[reserveIndex]=this.ticketType;
 					}
 				}else{
 					//予約したことがない席を選択した -> 予約配列に追加
@@ -136,17 +134,23 @@ var app=new Vue({
 					const sheet={num: index,type: this.ticketType};
 					this.reserveSheet.push(sheet);
 					this.reserveSheetNum.push(index)
+					this.reserveSheetType.push(this.ticketType)
 				}
 			}else{
 				const sheet={num: index,type: this.ticketType}
 				this.reserveSheet.push(sheet)
 				this.reserveSheetNum.push(index);
+				this.reserveSheetType.push(this.ticketType)
 			}
 			this.selectedSheet=-1;
+			console.log(this.reserveSheetType)
+			console.log(this.reserveSheetNum)
 		},
 		submitReserve:function(){
 			const inputSheet=document.getElementById('inputSheet')
 			inputSheet.value=this.reserveSheetNum
+			const inputFee=document.getElementById('inputFee')
+			inputFee.value=this.reservationSheetType
 			console.log(inputSheet.value)
 			const reserveForm=document.getElementById('reserveForm')
 			reserveForm.submit()

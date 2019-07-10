@@ -39,14 +39,19 @@ public class CheckFilter implements Filter{
 		public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 				throws IOException, ServletException{
 
+
 			//リクエストのサーブレットパスを取得
 			String servletPath = ((HttpServletRequest)request).getServletPath();
-			System.out.println(servletPath);
+		System.out.println(servletPath);
+
 
 			//除外画面に含まれている場合はチェックしない
 			if( Arrays.asList(excludeDispList).contains(servletPath)){
+		System.out.println("じょがい");
 				chain.doFilter(request, response);
 				return;
+			}else {
+		System.out.println("じょがいしない");
 			}
 			//js,cs,png,gif,ico,jpgは除外
 			if( Arrays.asList(excludeExtList).contains(getExt(servletPath))){
@@ -56,15 +61,15 @@ public class CheckFilter implements Filter{
 
 			//ログインセッションを取得し、存在しない場合は、ログイン画面に飛ばす
 			HttpSession session = ((HttpServletRequest)request).getSession(false);
+				//TOPに遷移しない
 
 			if( session == null ){
 				//セッションがない場合はログイン画面へ
 				((HttpServletResponse)response).sendRedirect("userLogin");
 							return;
-			}
-						UserInfoBeans loginInfo =
-					(UserInfoBeans)session.getAttribute("loginInfo");
-
+							}
+			UserInfoBeans loginInfo =(UserInfoBeans)session.getAttribute("loginInfo");
+		System.out.println(loginInfo);
 			if( loginInfo == null ){
 				//ログイン画面へ転送
 				((HttpServletResponse)response).sendRedirect("userLogin");

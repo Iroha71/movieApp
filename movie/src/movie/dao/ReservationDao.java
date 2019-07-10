@@ -8,6 +8,7 @@ import java.util.List;
 
 import movie.beans.ReservationBeans;
 
+
 public class ReservationDao extends DaoBase{
   public void insertReservation(Integer MovieTermNumber,String TheaterId,Integer ScreenNumber,
 			Integer MemberNumber) throws SQLException{

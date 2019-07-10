@@ -1,40 +1,47 @@
 package movie.beans;
 
 public class UserInfoBeans {
-	String mail;
-	String pass;
-	String name;
-	String sei;
-	String phone;
-	public String getMail() {
-		return mail;
+	int memberNumber;
+	String memberMail;
+	String memberPass;
+	String memberName;
+	String memberSei;
+	String memberPhone;
+	public int getMemberNumber() {
+		return memberNumber;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
 	}
-	public String getPass() {
-		return pass;
+	public String getMemberMail() {
+		return memberMail;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setMemberMail(String memberMail) {
+		this.memberMail = memberMail;
 	}
-	public String getName() {
-		return name;
+	public String getMemberPass() {
+		return memberPass;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMemberPass(String memberPass) {
+		this.memberPass = memberPass;
 	}
-	public String getSei() {
-		return sei;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setSei(String sei) {
-		this.sei = sei;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
-	public String getPhone() {
-		return phone;
+	public String getMemberSei() {
+		return memberSei;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setMemberSei(String memberSei) {
+		this.memberSei = memberSei;
+	}
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
 	}
 
 }

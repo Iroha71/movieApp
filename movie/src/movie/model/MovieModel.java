@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import movie.beans.FeeBeans;
 import movie.beans.MovieListBeans;
 import movie.dao.MovieDao;
 import movie.dao.MovieFeeDao;
@@ -108,5 +109,25 @@ public class MovieModel {
 		}
 
 		return reservelist;
+	}
+
+	public List<FeeBeans>getFee(){
+
+		List<FeeBeans>feeType = new ArrayList<FeeBeans>();
+
+		MovieDao dao = new MovieDao();
+
+		try {
+			dao.connect();
+
+			feeType = dao.getFee();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			dao.close();
+		}
+
+		return feeType;
 	}
 }

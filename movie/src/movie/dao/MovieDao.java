@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import movie.beans.FeeBeans;
 import movie.beans.MovieListBeans;
 
 public class MovieDao extends DaoBase {
@@ -123,6 +124,43 @@ public class MovieDao extends DaoBase {
 	  			}
 	  		}
 	  		return reservelist;
+	}
+	public List<FeeBeans> getFee(){
+
+		FeeBeans feeBeans;
+		List<FeeBeans> feeType = new ArrayList<FeeBeans>();
+		PreparedStatement stmt=null;
+	  	ResultSet rs=null;
+	  	String sql = "SELECT fee_type,fee_base from fee";
+	  	try {
+	  		stmt = con.prepareStatement(sql);
+
+	  		rs = stmt.executeQuery();
+
+	  		while(rs.next()) {
+	  			feeBeans = new FeeBeans();
+
+	  			feeBeans.setFeeType(rs.getString("fee_type"));
+	  			feeBeans.setFee(rs.getInt("fee_base"));
+
+	  			feeType.add(feeBeans);
+	  		}
+	  	}catch(SQLException e) {
+	  		e.printStackTrace();
+	  	}
+
+	  	finally{
+	  		if(con != null) {
+	  			try {
+	  				con.close();
+	  			}catch(SQLException e) {
+	  				e.printStackTrace();
+	  			}
+	  		}
+	  	}
+
+	  	return feeType;
+
 	}
     //UPDATE用
     public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail) {

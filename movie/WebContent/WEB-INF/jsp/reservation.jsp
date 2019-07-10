@@ -111,7 +111,7 @@ var app=new Vue({
 						console.log("削除");
 					}else{
 						console.log("予約処理")
-						this.reserveSheet[resetveIndex]['type']=this.ticketType;
+						this.reserveSheet[reserveIndex]['type']=this.ticketType;
 					}
 				}else{
 					//予約したことがない席を選択した -> 予約配列に追加

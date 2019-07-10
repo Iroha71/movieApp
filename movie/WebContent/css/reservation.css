@@ -64,3 +64,14 @@ button{
 .confirm-buy{
 	background-color: #3BABFD;
 }
+.modal-area{
+	background-color: rgba(255,255,255,0.7);
+	height: 100%;
+	width:100%;
+	z-index: 2;
+	position: absolute;
+}
+.check-modal{
+	width: 70%;
+	height: 60%;
+}

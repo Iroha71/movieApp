@@ -9,10 +9,12 @@
 <title>登録完了画面</title>
 </head>
 <body>
-<p class="text-success text-center">会員情報の登録を完了しました。</p>
+<div class="back">
+<p id="text"class="text-center">会員情報の登録を完了しました。</p>
 <form action="top" method="get">
 <div class="text-center">
-<input type="submit" name="top" value="一覧へ戻る" class="btn btn-success">
+<input type="submit" id="btn"name="top" value="一覧へ戻る" class="btn">
+</div>
 </div>
 </body>
 </html>

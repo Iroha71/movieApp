@@ -1,4 +1,12 @@
 @charset "UTF-8";
+.back{
+	background-color:;
+}
 .text-center{
-	margin-top:150px;
+	padding-top:150px;
+	color:#646464;
+}
+#btn{
+	background-color:#646464;
+	color:#FFFFFF;
 }

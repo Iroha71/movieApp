@@ -32,7 +32,7 @@ public class MovieListController extends HttpServlet {
 		//映画の一覧をリクエストにセット
 		request.setAttribute("list", list);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/movielist.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/top.jsp");
 		dispatcher.forward(request, response);
 	}
 

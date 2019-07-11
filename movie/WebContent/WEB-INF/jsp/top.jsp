@@ -12,7 +12,6 @@
 <body>
 <%
  List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
-
 %>
 <%
     if( list != null ){

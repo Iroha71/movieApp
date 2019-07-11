@@ -17,13 +17,13 @@
 	sheets = (String[])request.getAttribute("sheets");
 	int sheetCount=0;
 %>
-	<form action = "MovieReservationController" method = "get" id="reserveForm" class="hidden">
+	<form action = "MovieReservationController" method = "get" id="reserveForm" >
 		<input type="hidden" name="member"value=1>
 		<input type="hidden" name="term" value = 1>
 		<input type="hidden" name="theater" value=1>
 		<input type="hidden" name ="screen" value=1>
-		<input type="hidden" name = "fee" value=1 v-model="reserveSheetType" id="inputFee">
-		<input type="text" name = "sheet" v-model="reserveSheetNum" id="inputSheet">
+		<input type="hidden" name = "fee" v-for="reserveType in reserveSheetType" :value="reserveType">
+		<input type="hidden" name = "sheet" v-for="rs in reserveSheetNum" :value="rs">
 	</form>
 	<article class="row navbar">
 		<div class="col-sm-4 select-sheet">
@@ -44,9 +44,9 @@
 					<td>
 						<button class="sheet-div active-sheet" @click="selectSheet(<%=j %>)"><%=j %></button>
 						<select class="input-ticket" v-if="selectedSheet===<%=j %>" @change="reserve(<%=j%>)" v-model="ticketType">
-							<option value="券種を選択" disabled>券種を選択してください</option>
-							<option value="大人">大人</option>
-							<option value="取り消し" :disabled="isDisableCancel">取り消し</option>
+							<option value=0 disabled>券種を選択してください</option>
+							<option value=1>大人</option>
+							<option value=-1 :disabled="isDisableCancel">取り消し</option>
 						</select>
 					</td>
 					<%sheetCount++; %>
@@ -88,7 +88,7 @@ var app=new Vue({
 		selectedSheet: -1,
 		reserveSheet:[],
 		sheetNumber: 2,
-		ticketType: '券種を選択',
+		ticketType: 0,
 		isClicked: false,
 		sheets: [],
 		isModal: false,
@@ -99,10 +99,16 @@ var app=new Vue({
 	methods:{
 		showModal:function(isShow){
 			this.isModal=isShow
+			console.log(this.reserveSheetType)
+			const inputSheet=document.getElementById('inputSheet')
+			inputSheet.value=this.reserveSheetNum
+			const inputFee=document.getElementById('inputFee')
+			inputFee.value=this.reservationSheetType
+			const reserveForm=document.getElementById('reserveForm')
 		},
 		selectSheet:function(index){
 			this.selectedSheet=index
-			this.ticketType="券種を選択"
+			this.ticketType=0
 			if(this.reserveSheetNum.length>0){
 				const sheetNum=this.reserveSheetNum.indexOf(index)
 				if(sheetNum>=0){
@@ -128,7 +134,7 @@ var app=new Vue({
 					this.isDisableCancel=false
 					console.log(this.isDisableCancel)
 					/* チケット種類変更か予約取り消しか? */
-					if(this.ticketType==="取り消し"){
+					if(this.ticketType==-1){
 						this.reserveSheet.splice(reserveIndex,1);
 						this.reserveSheetNum.splice(reserveIndex,1);
 						this.reserveSheetType.splice(reserveIndex,1);
@@ -136,6 +142,7 @@ var app=new Vue({
 						this.reserveSheet[reserveIndex]['type']=this.ticketType;
 						this.reserveSheetType[reserveIndex]=this.ticketType;
 					}
+					console.log(this.reserveSheetType+" "+this.reserveSheetNum)
 				}else{
 					//予約したことがない席を選択した -> 予約配列に追加
 					this.isDisableCancel=true
@@ -154,11 +161,6 @@ var app=new Vue({
 			this.selectedSheet=-1;
 		},
 		submitReserve:function(){
-			const inputSheet=document.getElementById('inputSheet')
-			inputSheet.value=this.reserveSheetNum
-			const inputFee=document.getElementById('inputFee')
-			inputFee.value=this.reservationSheetType
-			console.log(inputSheet.value)
 			const reserveForm=document.getElementById('reserveForm')
 			reserveForm.submit()
 		}

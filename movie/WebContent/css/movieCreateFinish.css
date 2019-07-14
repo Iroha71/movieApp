@@ -1,0 +1,20 @@
+@charset "UTF-8";
+html{
+	height : 100%;
+}
+body{
+	height : 100%;
+
+}
+div.row{
+	background-color : #fffaf0;
+	height : 100%;
+}
+p{
+	font-size : 1.48em;
+	padding-top : 1em;
+	padding-bottom : 1em;
+}
+.button{
+	margin-right : 2em;
+}

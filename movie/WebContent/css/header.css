@@ -1,0 +1,151 @@
+.header {
+    width: 100%;
+    height: 77px;
+    background-color:#eed950;
+  }
+  img{
+      width: 179px;
+      height: 69px;
+      margin-bottom: 10px;
+      margin-left:12%;
+  }
+  .user{
+    position: absolute;top: 2.3%;right: 20%;
+  }
+  .link::after {
+    position: absolute;
+    bottom: 4px;
+    left: 43%;
+    content: '';
+    width: 0;
+    height: 1px;
+    background-color: #2b3a31;
+    transition: .3s;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  .link:hover::after {
+    width: 55%;
+  }
+  .link{
+    position: absolute;top: 4.3%;right: 10%;
+    color: rgb(34, 31, 31);
+    text-decoration: none;
+    width: 130px;
+  }
+  .link img{
+    vertical-align: middle;
+    height: 21px;
+    width: 21px;
+  }
+body{
+    margin: 0;
+  }
+  .global-nav {
+    position: fixed;
+    right: -320px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    padding-top: 40px;
+    background-color:rgb(17, 15, 15);
+    transition: all .6s;
+    z-index: 200;
+    overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+  }
+  .hamburger {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 70px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 300;
+  }
+  .global-nav__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .global-nav__item {
+    text-align: center;
+    padding: 0 14px;
+  }
+  .global-nav__item a {
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: rgb(243, 234, 234);
+  }
+  .global-nav__item a:hover {
+    background-color: rgb(65, 62, 62);
+  }
+  .hamburger__line {
+    position: absolute;
+    left: 11px;
+    width: 30px;
+    height: 2px;
+    background-color: rgb(61, 55, 55);
+    transition: all .6s;
+  }
+  .hamburger__line--1 {
+    top: 25px;
+  }
+  .hamburger__line--2 {
+    top: 35px;
+  }
+  .hamburger__line--3 {
+    top: 45px;
+  }
+  .black-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    background-color: #000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .6s;
+    cursor: pointer;
+  }
+  /* 表示された時用のCSS */
+  .nav-open .global-nav {
+    right: 0;
+  }
+  .nav-open .black-bg {
+    opacity: .8;
+    visibility: visible;
+  }
+  .nav-open .hamburger__line--1 {
+    transform: rotate(45deg);
+    top: 30px;
+    background-color: rgb(241, 235, 235);
+  }
+  .nav-open .hamburger__line--2 {
+    width: 0;
+    left: 50%;
+    background-color: rgb(241, 235, 235);
+  }
+  .nav-open .hamburger__line--3 {
+    transform: rotate(-45deg);
+    top: 30px;
+    background-color: rgb(241, 235, 235);
+  }
+  .b,.c{
+    margin-top: 10px;
+    margin-left:10px;
+    margin-right:10px;
+    background: #000;
+    color: #fff;
+    height: 5000px;
+    border-left: 13px dashed #fff;
+    border-right: 13px dashed #fff;
+    box-shadow: 0px 0px 0px 10px #000;
+}
+.a{
+    display:flex;
+    justify-content:space-between;
+}

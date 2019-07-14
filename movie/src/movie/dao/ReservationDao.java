@@ -75,7 +75,7 @@ public class ReservationDao extends DaoBase{
 			for(int len = 0;len<SheetNumber.size();len++) {
 				reservationItem.setInt(1,reservationNumber);
 				reservationItem.setInt(2,(Integer)SheetNumber.get(len));
-				reservationItem.setString(3,(String)FeeType.get(len));
+				reservationItem.setInt(3,Integer.parseInt((String)FeeType.get(len)));
 
 				reservationItem.executeUpdate();
 			}

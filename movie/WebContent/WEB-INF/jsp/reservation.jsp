@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import ="java.util.List" %>
+<%@ page import ="movie.beans.FeeBeans" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +18,8 @@
 	String[] sheets=new String[100];
 	sheets = (String[])request.getAttribute("sheets");
 	int sheetCount=0;
+	List<FeeBeans> feeList=(List<FeeBeans>)session.getAttribute("feeList");
+	List<Integer> reserveSheetList=(List<Integer>)session.getAttribute("reserveSheetList");
 %>
 	<form action = "MovieReservationController" method = "get" id="reserveForm" >
 		<input type="hidden" name="member"value=1>
@@ -40,16 +44,24 @@
 			<%for(int i=0;i<10;i++){ %>
 				<tr>
 				<%for(int j=(i*10)+1;j<=(i+1)*10;j++){ %>
+
 					<%if(Integer.parseInt(sheets[sheetCount])==j-1){ %>
-					<td>
-						<button class="sheet-div active-sheet" @click="selectSheet(<%=j %>)"><%=j %></button>
-						<select class="input-ticket" v-if="selectedSheet===<%=j %>" @change="reserve(<%=j%>)" v-model="ticketType">
-							<option value=0 disabled>券種を選択してください</option>
-							<option value=1>大人</option>
-							<option value=-1 :disabled="isDisableCancel">取り消し</option>
-						</select>
-					</td>
+						<%if(reserveSheetList.indexOf(j)==-1){ %>
+						<td>
+							<button class="sheet-div active-sheet" @click="selectSheet(<%=j %>)"><%=reserveSheetList.size() %></button>
+							<select class="input-ticket" v-if="selectedSheet===<%=j %>" @change="reserve(<%=j%>)" v-model="ticketType">
+								<option value=0 disabled>券種を選択してください</option>
+								<%for(int idx=0;idx<feeList.size();idx++){ %>
+								<option value=<%=idx+1 %>><%=feeList.get(idx).getFeeType() %> ￥<%=feeList.get(idx).getFee() %></option>
+								<%} %>
+								<option value=-1 :disabled="isDisableCancel">取り消し</option>
+							</select>
+						</td>
+						<%}else{ %>
+						<td><button class="sheet-div active-sheet" disabled><%=j %></button></td>
+						<%} %>
 					<%sheetCount++; %>
+
 					<%}else{ %>
 					<td>
 						<button class="sheet-div disable-sheet" disabled></button>

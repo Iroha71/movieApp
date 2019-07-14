@@ -1,6 +1,7 @@
 package movie.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,12 +49,14 @@ public class MovieReservationStartController extends HttpServlet {
 			Integer MemberNumber = Integer.parseInt((String)request.getParameter("member"));
 			flag = 1;
 			List<FeeBeans> feeList=new MovieModel().getFee();
+			List<Integer> reserveSheetList=new ReserveModel().getReserveSheet(MovieTermNumber, TheaterId, ScreenNumber);
 
 			session.setAttribute("MovieTermNumber", MovieTermNumber);
 			session.setAttribute("TheaterId", TheaterId);
 			session.setAttribute("ScreenNumber", ScreenNumber);
 			session.setAttribute("MemberNumber", MemberNumber);
 			session.setAttribute("feeList", feeList);
+			session.setAttribute("reserveSheetList", reserveSheetList);
 			session.setAttribute("flag", flag);
 
 			String[] sheets = reserve.property();

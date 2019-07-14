@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import movie.beans.FeeBeans;
 import movie.beans.UserInfoBeans;
+import movie.model.MovieModel;
 import movie.model.ReserveModel;
 
 @WebServlet("/MovieReservationStartContorller")
@@ -45,11 +47,13 @@ public class MovieReservationStartController extends HttpServlet {
 			Integer ScreenNumber = Integer.parseInt((String)request.getParameter("screen"));
 			Integer MemberNumber = Integer.parseInt((String)request.getParameter("member"));
 			flag = 1;
+			List<FeeBeans> feeList=new MovieModel().getFee();
 
 			session.setAttribute("MovieTermNumber", MovieTermNumber);
 			session.setAttribute("TheaterId", TheaterId);
 			session.setAttribute("ScreenNumber", ScreenNumber);
 			session.setAttribute("MemberNumber", MemberNumber);
+			session.setAttribute("feeList", feeList);
 			session.setAttribute("flag", flag);
 
 			String[] sheets = reserve.property();

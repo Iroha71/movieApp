@@ -64,7 +64,7 @@
 			<%} %>
 			</table>
 			<button type="button" onclick="location.href='top'" class="btn btn-danger d-block">戻る</button>
-			<button type="button" @click="submitReserve" class="btn btn-primary d-block">予約する</button>
+			<button type="button" @click="submitReserve" class="btn btn-primary d-block" :disabled="cannotReserve">予約する</button>
 		</div>
 		<div class="col-sm-3">
 			<table border="1" class="check-table">
@@ -176,6 +176,15 @@ var app=new Vue({
 				break
 			default:
 				return 0
+			}
+		},
+	},
+	computed:{
+		cannotReserve:function(){
+			if(this.reserveSheet.length>0){
+				return false
+			}else{
+				return true
 			}
 		}
 	}

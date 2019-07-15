@@ -48,7 +48,7 @@
 					<%if(Integer.parseInt(sheets[sheetCount])==j-1){ %>
 						<%if(reserveSheetList.indexOf(j)==-1){ %>
 						<td>
-							<button class="sheet-div active-sheet" @click="selectSheet(<%=j %>)"><%=reserveSheetList.size() %></button>
+							<button class="sheet-div active-sheet" @click="selectSheet(<%=j %>)" :class="{'select-sheet':reserveSheetNum.indexOf(<%=j%>)>0}"><%=j %></button>
 							<select class="input-ticket" v-if="selectedSheet===<%=j %>" @change="reserve(<%=j%>)" v-model="ticketType">
 								<option value=0 disabled>券種を選択してください</option>
 								<%for(int idx=0;idx<feeList.size();idx++){ %>
@@ -58,7 +58,7 @@
 							</select>
 						</td>
 						<%}else{ %>
-						<td><button class="sheet-div active-sheet" disabled><%=j %></button></td>
+						<td><button class="sheet-div reserve-sheet" disabled>×</button></td>
 						<%} %>
 					<%sheetCount++; %>
 

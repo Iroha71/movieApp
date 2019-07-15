@@ -39,20 +39,14 @@ button{
 	color: rgba(255,255,255,0);
 }
 
+.reserve-sheet{
+	background-color: #E92600;
+	color: white;
+}
+
 .input-ticket{
 	z-index: 1;
 	position: fixed;
-}
-
-.slide-enter-active{
-	transition: .5s
-}
-.slide-enter{
-	transform: translateX(100%);
-
-}
-.slide-leave-to{
-	opacity: 0
 }
 
 .select-ticket{

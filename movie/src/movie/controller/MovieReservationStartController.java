@@ -23,7 +23,7 @@ public class MovieReservationStartController extends HttpServlet {
 
 		ReserveModel reserve = new ReserveModel();
 		HttpSession session = request.getSession(true);
-
+		List<FeeBeans> feeList=new MovieModel().getFee();
 		UserInfoBeans loginInfo = (UserInfoBeans) session.getAttribute("loginInfo");
 		Integer flag = (Integer)session.getAttribute("flag");
 		if(loginInfo == null) {
@@ -38,6 +38,7 @@ public class MovieReservationStartController extends HttpServlet {
 			session.setAttribute("TheaterId", TheaterId);
 			session.setAttribute("ScreenNumber", ScreenNumber);
 			session.setAttribute("MemberNumber", MemberNumber);
+			session.setAttribute("feeList", feeList);
 			session.setAttribute("flag", flag);
 
 			response.sendRedirect("userLogin");
@@ -48,7 +49,6 @@ public class MovieReservationStartController extends HttpServlet {
 			Integer ScreenNumber = Integer.parseInt((String)request.getParameter("screen"));
 			Integer MemberNumber = Integer.parseInt((String)request.getParameter("member"));
 			flag = 1;
-			List<FeeBeans> feeList=new MovieModel().getFee();
 			List<Integer> reserveSheetList=new ReserveModel().getReserveSheet(MovieTermNumber, TheaterId, ScreenNumber);
 
 			session.setAttribute("MovieTermNumber", MovieTermNumber);

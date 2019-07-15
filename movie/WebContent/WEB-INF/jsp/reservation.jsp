@@ -29,17 +29,9 @@
 		<input type="hidden" name = "fee" v-for="reserveType in reserveSheetType" :value="reserveType">
 		<input type="hidden" name = "sheet" v-for="rs in reserveSheetNum" :value="rs">
 	</form>
-	<article class="row navbar">
-		<div class="col-sm-4 select-sheet">
-			座席選択
-		</div>
-		<div class="col-sm-4 confirm-buy">
-			購入情報のご確認
-		</div>
-	</article>
 	<article class="row content" v-if="status=='selectSheet'">
 		<div class="col-sm-2"></div>
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 			<table>
 			<%for(int i=0;i<10;i++){ %>
 				<tr>
@@ -71,24 +63,24 @@
 				</tr>
 			<%} %>
 			</table>
-			<button type="button" @click="showModal(true)" class="btn btn-primary">次へ</button>
+			<button type="button" onclick="location.href='top'" class="btn btn-danger d-block">戻る</button>
+			<button type="button" @click="submitReserve" class="btn btn-primary d-block">予約する</button>
 		</div>
-		<section class="modal-area col-sm-12 center" v-if="isModal">
-			<div class="check-modal center">
-				こちらで予約しますか？
-				<table>
-					<tr>
-						<th>タイトル</th>
-						<th>チケット料金</th>
-						<th>座席番号</th>
-						<th>上映時間</th>
-					</tr>
-
-				</table>
-				<button type="button" @click="submitReserve" class="btn btn-primary">取り消し</button>
-				<button type="button" @click="showModal(false)" class="btn btn-worning">キャンセル</button>
-			</div>
-		</section>
+		<div class="col-sm-3">
+			<table border="1" class="check-table">
+				<tr>
+					<th>席番号</th>
+					<th>チケットタイプ</th>
+					<th>金額</th>
+				</tr>
+				<%int count=0; %>
+				<tr v-for="(sheet,index) in reserveSheet">
+					<td>{{sheet['num']}}</td>
+					<td>{{getReserveType(sheet['type'])}}</td>
+					<td>￥{{getReserveFee(sheet['type'])}}</td>
+				</tr>
+			</table>
+		</div>
 	</article>
 </div>
 </body>
@@ -109,15 +101,6 @@ var app=new Vue({
 		isDisableCancel: true,
 	},
 	methods:{
-		showModal:function(isShow){
-			this.isModal=isShow
-			console.log(this.reserveSheetType)
-			const inputSheet=document.getElementById('inputSheet')
-			inputSheet.value=this.reserveSheetNum
-			const inputFee=document.getElementById('inputFee')
-			inputFee.value=this.reservationSheetType
-			const reserveForm=document.getElementById('reserveForm')
-		},
 		selectSheet:function(index){
 			this.selectedSheet=index
 			this.ticketType=0
@@ -175,6 +158,25 @@ var app=new Vue({
 		submitReserve:function(){
 			const reserveForm=document.getElementById('reserveForm')
 			reserveForm.submit()
+		},
+		getReserveType:function(type){
+			console.log(type)
+			switch(type){
+			case '1':
+				return '大人'
+				break
+			default:
+				return 'その他'
+			}
+		},
+		getReserveFee(type){
+			switch(type){
+			case '1':
+				return 2000
+				break
+			default:
+				return 0
+			}
 		}
 	}
 })

@@ -1,0 +1,88 @@
+@charset "UTF-8";
+.content{
+	height: 80%;
+	padding-top: 10px;
+}
+.navbar{
+	height: 10%;
+	text-align: center;
+}
+table{
+	width: 100%;
+	height: 100%;
+	text-align:center;
+}
+td{
+	width: 10%;
+	padding: 5px;
+	background-color: #575757;
+}
+button{
+	border: none;
+}
+
+.btn-primary{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+}
+.btn-danger{
+	float: left;
+	margin-top: 5px;
+}
+
+.sheet-div{
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	background-color: #edd84f;
+}
+
+.active-sheet{
+	transition: .3s;
+}
+
+.active-sheet:hover{
+	background-color: #69B5D5;
+}
+.disable-sheet{
+	background: rgba(255,255,255,0);
+	color: rgba(255,255,255,0);
+}
+
+.reserve-sheet{
+	background-color: #E92600;
+	color: white;
+}
+
+.input-ticket{
+	z-index: 1;
+	position: fixed;
+}
+
+.select-ticket{
+	background-color: #6DC1FF
+}
+.select-sheet{
+	background-color: #B2DDFF
+}
+.confirm-buy{
+	background-color: #3BABFD;
+}
+.modal-area{
+	background-color: rgba(255,255,255,0.7);
+	height: 100%;
+	width:100%;
+	z-index: 2;
+	position: absolute;
+}
+.check-modal{
+	width: 70%;
+	height: 60%;
+}
+.check-table{
+	height: auto;
+}
+.check-table td{
+	background-color: white;
+}

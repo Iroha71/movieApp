@@ -35,7 +35,31 @@ public class MovieModel {
 
 		return list;
 	}
+	public List<MovieListBeans> getMovie(){
+		List<MovieListBeans> list = new ArrayList<MovieListBeans>();
 
+		MovieDao dao=new MovieDao();
+
+		try{
+			///////////////////////////////////
+			//DBの接続
+			dao.connect();
+			///////////////////////////////////
+			//一覧の取得
+			list=dao.getMovie();
+
+		}catch(Exception e) {
+		//エラー発生した場合にコンソールにログを出力する
+			e.printStackTrace();
+		}
+		finally {
+			//接続（コネクション）を閉じる
+			dao.close();
+
+		}
+
+		return list;
+	}
 	public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail) {
 		MovieDao moviedao = new MovieDao();
 			try {

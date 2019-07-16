@@ -69,6 +69,56 @@ public class MovieDao extends DaoBase {
 
   		return list;
   	}
+    public List<MovieListBeans>getMovie(){
+
+    	  if(con == null){
+    				//接続していない場合何もしない
+    				return null;
+    	  }
+
+    	  List<MovieListBeans> list=new ArrayList<MovieListBeans>();
+    	  MovieListBeans beans;
+    	  PreparedStatement stmt=null;
+    	  ResultSet rs=null;
+    	  String sql = "SELECT * FROM movie";
+          try{
+    			///////////////////////////////////
+    			//SELECT文の発行
+    			stmt = con.prepareStatement(sql);
+    			rs=stmt.executeQuery();
+
+    			while(rs.next()){
+    				//////////////////////////////////
+    				//ビーンズのリストに格納する
+    				beans = new MovieListBeans();
+
+    				beans.setMovieName(rs.getString("movie_name"));
+    				beans.setStartDate(rs.getDate("release_start_date"));
+    				beans.setFinishDate(rs.getDate("release_finish_date"));
+    				beans.setCast(rs.getString("cast"));
+    				beans.setDirected(rs.getString("directed"));
+    				beans.setDetail(rs.getString("movie_detail"));
+
+    				list.add(beans);
+    			}
+    		}catch(SQLException e) {
+    			//エラー発生した場合にコンソールにログを出力する
+    			e.printStackTrace();
+    		}
+    		finally {
+    			//接続（コネクション）を閉じる
+    			if(con!=null) {
+    				try {
+    					con.close();
+    				}
+    				catch(SQLException e) {
+    					e.printStackTrace();
+    				}
+    			}
+    		}
+
+    		return list;
+    	}
     public List<MovieListBeans>getReserveList(){
 
 	  	  if(con == null){

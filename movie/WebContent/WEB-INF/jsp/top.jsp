@@ -45,12 +45,12 @@
 	    	<%}else if(percent >=0.01){ %>
 	    	    △
 	    	<%}else if(percent ==0){ %>
-	    	    ×</td>
+	    	    ×<%} %></td>
 	</tr>
 </table>
 </button>
 </form>
 </div>
-<% }} }%>
+<% } }%>
 </body>
 </html>

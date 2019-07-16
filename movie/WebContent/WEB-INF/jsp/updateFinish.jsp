@@ -4,9 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/movieCreateFinish.css">
+<link rel="stylesheet" href="lib/bootstrap.min.css">
 <title>完了</title>
 </head>
 <body>
-更新完了
+<div class="row">
+<div class="col-3"></div>
+<div class="col-9">
+	<p>映画情報を更新しました</p>
+	<form method="get">
+		<input type="submit" value="一覧へ戻る" class="button btn btn-success" formaction="top">
+		<input type ="submit" value="映画更新を続ける" class="button btn btn-success" formaction="movieUpdateStart">
+	</form>
+</div>
+</div>
 </body>
 </html>

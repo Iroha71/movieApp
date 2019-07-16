@@ -1,42 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="movie.beans.MovieListBeans" %>
-    <%@ page import="java.util.List" %>
+    <%@ page import ="movie.beans.FeeBeans" %>
+	<%@ page import="java.util.List" %>
+	<%@ page import="java.util.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href = "css/updateStart.css">
+<link rel="stylesheet" href="lib/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Update</title>
+<title>映画情報更新画面</title>
 </head>
 <body>
 <%
 	List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
+	List<FeeBeans>feeType = (List<FeeBeans>)request.getAttribute("feeType");
 %>
-<form action="movieUpdate" method="get">
-<table border="0">
+<div class="container-fluid">
+	<div class="row">
 <% for(MovieListBeans beans : list){ %>
-	<tr><td>映画名 :</td></tr>
-	<tr><td><input type="text" name="movieName" value="<%=beans.getMovieName()%>"></td></tr>
 
-	<tr><td>公開日</td></tr>
-	<tr><td><input type="text" name= "startDate" value= "<%=beans.getStartDate() %>"></td></tr>
+		<div class = "col-4">
+			<div class ="detail-group">
+				<span>映画名</span>
+			</div>
+			<div class ="detail-group">
+				<span>映画画像</span>
+			</div>
+			<div class ="detail-group">
+				<span>公開開始日</span>
+			</div>
+			<div class ="detail-group">
+				<span>公開終了日</span>
+			</div>
+			<div class ="detail-group">
+				<span>監督</span>
+			</div>
+			<div class ="detail-group">
+				<span>キャスト</span>
+			</div>
+			<div class ="detail-group">
+				<span>チケット値段</span>
+			</div>
+			<div class ="detail-group">
+				<span>解説</span>
+			</div>
+		</div>
+			<div class="col-8">
+				<form action="movieUpdate" method="get" enctype="multipart/form-data">
+			<div class="form-group">
+				<input type="text" name="movieName" class="form-control" value=<%=beans.getMovieName()%>>
+			</div>
+			<div class="form-group pass">
+				<input type="file" class="form-control" name="thumbnail">
+			</div>
+			<div class="form-group date">
+				<input type="date" name="releaseStartDate" class="form-control" value=<%=beans.getStartDate() %>>
+				<br>
+				<input type="date" name="releaseFinishDate" class="form-control" value=<%=beans.getFinishDate() %>>
+			</div>
+			<div class="form-group">
+				<input type="text" name="directed" class="form-control"value =<%=beans.getDirected() %>>
+			</div>
+			<div class="form-group">
+				<input type="text" name="cast" class="form-control" value=<%=beans.getCast() %>>
+			</div>
+			<div class="form-group">
+				<select name = "name" class="feeSelect">
+					<%for(FeeBeans feeBeans : feeType){ %>
+						<option value="<%=feeBeans.getFeeType()%>"><%=feeBeans.getFeeType()%>:<%=feeBeans.getFee() %>円</option>
+					<%} %>
+				</select>
+			</div>
+			<div class="form-group">
+				<textarea name="movieDetail" class="form-control"><%=beans.getDetail() %></textarea>
+			</div>
+				</div>
 
-	<tr><td>公開終了日</td></tr>
-	<tr><td><input type="text" name="finishDate" value= "<%=beans.getFinishDate() %>"></td></tr>
 
-	<tr><td>キャスト</td></tr>
-	<tr><td><input type="text" name = "cast" value= "<%=beans.getCast() %>"></td></tr>
-
-	<tr><td>監督</td></tr>
-	<tr><td><input type="text" name="directed" value="<%=beans.getDirected()%>"></td></tr>
-
-	<tr><td>映画詳細</td></tr>
-	<tr><td><input type="text" name="detail" value="<%=beans.getDetail() %>"></td></tr>
-
-<%}%>
-</table>
-<button type="submit">更新しますか？</button>
-</form>
+		<%}%>
+		<div class = "col-4"></div>
+		<div class = "col-8">
+			<input type="submit" value="更新する" class="btn btn-primary">
+		</div>
+		</form>
+</div>
+</div>
 </body>
 </html>

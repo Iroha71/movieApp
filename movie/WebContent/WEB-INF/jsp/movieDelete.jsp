@@ -15,6 +15,7 @@
 <title>映画予約取り消し</title>
 </head>
 <body class="container-fluid">
+<jsp:include page="./header/header.jsp" />
 <div id='app'>
 <%
 List<ReservationBeans>list = (List<ReservationBeans>)request.getAttribute("list");

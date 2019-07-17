@@ -13,6 +13,7 @@
 <script src="lib/vue.min.js"></script>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <div class="container-fluid" id="app">
 <%
 	String[] sheets=new String[100];

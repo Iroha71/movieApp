@@ -7,6 +7,7 @@
 <title>管理者予約確認</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <table border="2">
 	<tr>
 		<td colspan = "2">movie name</td>

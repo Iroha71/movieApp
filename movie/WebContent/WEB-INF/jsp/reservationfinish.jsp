@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>登録が終わったでごぜーますよ</p>
+<jsp:include page="./header/header.jsp" />
+<p>登録完了</p>
 <form action="top" method="get">
 <input type="submit" name="top" value="一覧へ戻る">
 </form>

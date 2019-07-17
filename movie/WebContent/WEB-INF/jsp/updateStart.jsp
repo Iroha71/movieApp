@@ -14,6 +14,7 @@
 <title>映画情報更新画面</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <%
 	List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
 	List<FeeBeans>feeType = (List<FeeBeans>)request.getAttribute("feeType");

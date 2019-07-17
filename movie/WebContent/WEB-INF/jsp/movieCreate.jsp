@@ -12,6 +12,7 @@
 <title>映画情報登録</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <%
 	List<FeeBeans>feeType = (List<FeeBeans>)request.getAttribute("feeType");
 %>

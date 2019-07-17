@@ -8,6 +8,7 @@
 <title>削除完了</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <%String movieName=(String)session.getAttribute("movieName"); %>
 	<div class="container-fluid">
 		<div class="row">

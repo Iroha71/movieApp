@@ -9,6 +9,7 @@
 <title>完了</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <div class="row">
 <div class="col-3"></div>
 <div class="col-9">

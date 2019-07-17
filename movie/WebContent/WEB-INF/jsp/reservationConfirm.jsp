@@ -14,6 +14,7 @@
 <title>予約確認</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <div class="container-fuild">
 <div class="row tables">
 	<div class ="col-1"></div>

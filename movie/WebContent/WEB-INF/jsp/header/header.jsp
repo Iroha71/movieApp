@@ -13,8 +13,8 @@
 			<div><a href="userLogin" class="link"><img src="img/user.png" alt="user">ログイン</a></div>
 		<nav class="global-nav">
 		  <ul class="global-nav__list">
-			<li class="global-nav__item"><a href="">トップ</a></li>
-			<li class="global-nav__item"><a href="">映画予約取り消し</a></li>
+			<li class="global-nav__item"><a href="top">トップ</a></li>
+			<li class="global-nav__item"><a href="show">映画予約取り消し</a></li>
 			<li class="global-nav__item"><a href="">会員情報変更</a></li>
 			<li class="global-nav__item"><a href="">退会手続き</a></li>
 		  </ul>

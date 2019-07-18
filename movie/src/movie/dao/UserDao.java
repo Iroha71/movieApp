@@ -33,6 +33,7 @@ public class UserDao extends DaoBase{
 				loginInfo.setMemberSei(rs.getString("member_sei"));
 				loginInfo.setMemberPhone(rs.getString("member_phone"));
 				loginInfo.setMemberPass(rs.getString("member_pass"));
+				loginInfo.setIsDeleted(rs.getBoolean("is_deleted"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -21,6 +21,8 @@
 				</div>
 				<%if(error!=null && error.equals("mistake")){ %>
 					<p>メールアドレスまたはパスワードが間違っています</p>
+				<%}else if(error !=null && error.equals("noUser")){ %>
+					<p>ユーザが存在しません</p>
 				<%} %>
 				<form action="auth" method="POST" class="center">
 					<div class="form-group">

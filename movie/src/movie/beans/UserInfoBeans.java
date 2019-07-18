@@ -7,6 +7,7 @@ public class UserInfoBeans {
 	String memberName;
 	String memberSei;
 	String memberPhone;
+	boolean isDeleted;
 	public int getMemberNumber() {
 		return memberNumber;
 	}
@@ -42,6 +43,12 @@ public class UserInfoBeans {
 	}
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
+	}
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted=isDeleted;
 	}
 
 }

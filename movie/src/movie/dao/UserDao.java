@@ -33,6 +33,7 @@ public class UserDao extends DaoBase{
 				loginInfo.setMemberSei(rs.getString("member_sei"));
 				loginInfo.setMemberPhone(rs.getString("member_phone"));
 				loginInfo.setMemberPass(rs.getString("member_pass"));
+				loginInfo.setIsDeleted(rs.getBoolean("is_deleted"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -131,6 +132,30 @@ public class UserDao extends DaoBase{
 			subscribe.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void delete(int memberNumber) {
+		if(con==null) {
+			return;
+		}
+		PreparedStatement stmt=null;
+		try {
+			String sql="update member set is_deleted=true where member_number = ?";
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, memberNumber);
+			stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}finally {
+			if(stmt!=null) {
+				try {
+					stmt.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }

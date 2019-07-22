@@ -28,8 +28,12 @@ public class LoginServlet extends HttpServlet {
 		UserModel userModel=new UserModel();
 		loginInfo=userModel.login(mail, password);
 		if(loginInfo!=null) {
-			session.setAttribute("loginInfo", loginInfo);
-			resp.sendRedirect("top");
+			if(!loginInfo.getIsDeleted()) {
+				session.setAttribute("loginInfo", loginInfo);
+				resp.sendRedirect("top");
+			}else {
+				resp.sendRedirect("userLogin?error=noUser");
+			}
 		}else {
 			resp.sendRedirect("userLogin?error=mistake");
 		}

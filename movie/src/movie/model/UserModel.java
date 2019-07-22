@@ -58,4 +58,20 @@ public class UserModel {
 			}
 		}
 	}
+
+	/* 退会処理 */
+	public void deleteUser(int memberNumber) {
+		UserDao user=new UserDao();
+		try {
+			user.connect();
+			user.delete(memberNumber);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(user!=null) {
+				user.close();
+				user=null;
+			}
+		}
+	}
 }

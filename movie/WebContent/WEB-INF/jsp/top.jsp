@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/top.css">
 <title>TOP</title>
 </head>
 <body>
@@ -22,36 +23,34 @@
 	double sa=beans.getSheet() - beans.getCount();
 	double percent= sa / beans.getSheet();
 %>
-<div id="list">
+<div class="movie">
+    <div>
+        <img src="img/harry.png" class="movie-img">
+            </div>
+                <table border="0" class="info">
+                <tr>
+                <td class="title" algin="left"><%=beans.getMovieName()%></td>
+                </tr>
+                <form action="MovieReservationStartContorller" method="get">
+                <tr>
+                <td class="ticket"><button type="submit" name="ticket" class="tbtn">
+                            <table border="0" class="status">
+                                <tr><td><%=beans.getTermStart()%>～<%=beans.getTermFinish()%></td></tr>
+                                <tr><td><% if( percent >=0.9){ %>
+	    		                          ◎
+	    	                            <%}else if(percent >=0.3){%>
+	    	                              〇
+	    	                            <%}else if(percent >=0.01){ %>
+	    	                              △
+	    	                            <%}else if(percent ==0){ %>
+	    	                              ×<%} %></td></tr>
+                            </table>
+                </button></td>
+               </tr>
+               </form>
+            </table>
+        </div>
+        <% } }%>
 
-<form action="MovieReservationStartContorller" method="get">
-<button type="submit" name="ticket">
-<table border="0">
-	<tr>
-		<td>タイトル : </td>
-		<td><%=beans.getMovieName()%></td>
-	</tr>
-	<tr>
-		<td>上映時間 : </td>
-		<td><%=beans.getTermStart()%>～<%=beans.getTermFinish()%></td>
-
-	</tr>
-
-	<tr>
-	    <td>残り状況 : </td>
-	    <td><% if( percent >=0.9){ %>
-	    		◎
-	    	<%}else if(percent >=0.3){%>
-	    	    〇
-	    	<%}else if(percent >=0.01){ %>
-	    	    △
-	    	<%}else if(percent ==0){ %>
-	    	    ×<%} %></td>
-	</tr>
-</table>
-</button>
-</form>
-</div>
-<% } }%>
 </body>
 </html>

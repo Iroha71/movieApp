@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 予約を取り消しました。
 </body>
 </html>

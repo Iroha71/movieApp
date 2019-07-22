@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import movie.beans.MovieReservationBeans;
+import movie.beans.ReservationBeans;
+
 
 public class ReservationDao extends DaoBase{
   public void insertReservation(Integer MovieTermNumber,String TheaterId,Integer ScreenNumber,
@@ -74,7 +75,7 @@ public class ReservationDao extends DaoBase{
 			for(int len = 0;len<SheetNumber.size();len++) {
 				reservationItem.setInt(1,reservationNumber);
 				reservationItem.setInt(2,(Integer)SheetNumber.get(len));
-				reservationItem.setString(3,(String)FeeType.get(len));
+				reservationItem.setInt(3,Integer.parseInt((String)FeeType.get(len)));
 
 				reservationItem.executeUpdate();
 			}
@@ -93,13 +94,13 @@ public class ReservationDao extends DaoBase{
 		}
 	}
 
-	public List<MovieReservationBeans> select(int memberNumber) {
+	public List<ReservationBeans> select(int memberNumber) {
 		if(con == null) {
-			//戻り方をリストに変更した方がいいのでは？
+
 			return null;
 	}
-		MovieReservationBeans beans;
-		List<MovieReservationBeans>list = new ArrayList<MovieReservationBeans>();
+		ReservationBeans beans;
+		List<ReservationBeans>list = new ArrayList<ReservationBeans>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
@@ -116,13 +117,13 @@ public class ReservationDao extends DaoBase{
 					"INNER JOIN theater ON screen.theater_id = theater.theater_id "+
 					"INNER JOIN movie_reservation_item ON movie_reservation_item.reservation_number = movie_reservation.reservation_number " +
 					"Where movie_reservation.member_number = ?;");
-			//Column 'movie_id' in field list is ambiguous?
+
 
 			stmt.setInt(1,memberNumber);
 			rs=stmt.executeQuery();
 
 		while(rs.next()) {
-			beans = new MovieReservationBeans();
+			beans = new ReservationBeans();
 
 			beans.setMovieId(rs.getInt("movie.movie_id"));
 			beans.setMovieName(rs.getString("movie.movie_name"));
@@ -182,5 +183,38 @@ public class ReservationDao extends DaoBase{
 				}
 			}
 		}
+	}
+
+	public List<Integer> selectReserveSheet(int termNum,String theaterId,int ScreenNum) {
+		if(con==null) {
+			return null;
+		}
+		List<Integer> reserveList=new ArrayList<Integer>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			String sql="select movie_reservation_item.sheet_number from movie_reservation "
+					+ "inner join movie_reservation_item on movie_reservation.reservation_number=movie_reservation_item.reservation_number "
+					+ "where movie_term_number=? and theater_id=? and screen_number=?";
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, termNum);
+			stmt.setString(2, theaterId);
+			stmt.setInt(3, ScreenNum);
+			rs=stmt.executeQuery();
+			while(rs.next()) {
+				reserveList.add(rs.getInt("movie_reservation_item.sheet_number"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(con!=null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return reserveList;
 	}
 }

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import movie.beans.MovieListBeans;
 import movie.model.MovieModel;
@@ -28,6 +29,10 @@ public class MovieListController extends HttpServlet {
 
         list=movieModel.getList();
 
+        //flagをsessionから削除
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("flag");
+
 		/////////////////////////////
 		//映画の一覧をリクエストにセット
 		request.setAttribute("list", list);
@@ -35,5 +40,4 @@ public class MovieListController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/top.jsp");
 		dispatcher.forward(request, response);
 	}
-
-	}
+}

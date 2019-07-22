@@ -1,0 +1,16 @@
+@charset "UTF-8";
+.row{
+	height: 100%;
+}
+form{
+	background-color: #FF9A08;
+	padding: 10px;
+	border-radius: 10px;
+	height: 40%;
+	width: 100%;
+}
+
+form button{
+	margin-right: auto;
+	margin-left: auto;
+}

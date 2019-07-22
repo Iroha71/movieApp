@@ -7,6 +7,18 @@
 <title>管理者予約確認</title>
 </head>
 <body>
-
+<jsp:include page="./header/header.jsp" />
+<table border="2">
+	<tr>
+		<td colspan = "2">movie name</td>
+	</tr>
+	<tr>
+		<th>宮本桃太郎日記</th>
+		<td>1人</td>
+	</tr>
+</table>
+<form>
+	<input type="submit" name="top" value="映画一覧画面へ">
+</form>
 </body>
 </html>

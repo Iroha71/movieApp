@@ -5,7 +5,9 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class MovieListBeans implements Serializable {
-	private String movieId;
+
+	private int movieId;
+	//intに修正。
 	private int adminNum;
 	private String movieName;
 	private String cast;
@@ -18,10 +20,10 @@ public class MovieListBeans implements Serializable {
 	private int count;
 	private int sheet;
 
-	public String getMovieId() {
+	public int getMovieId() {
 		return movieId;
 	}
-	public void setMovieId(String movieId) {
+	public void setMovieId(int movieId) {
 		this.movieId = movieId;
 	}
 	public int getAdminNum() {

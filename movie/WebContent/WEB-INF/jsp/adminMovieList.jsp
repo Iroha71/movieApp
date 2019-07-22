@@ -11,6 +11,7 @@
 <title>管理者映画一覧</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <%
  List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
 

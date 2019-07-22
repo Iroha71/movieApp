@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import movie.beans.UserInfoBeans;
 import movie.model.UserModel;
 import movie.util.Sanitize;
 
@@ -20,12 +21,15 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session=req.getSession();
 		String mail=Sanitize.sanitizing(req.getParameter("mail"));
 		String password=Sanitize.sanitizing(req.getParameter("password"));
+
+		UserInfoBeans loginInfo = new UserInfoBeans();
+
 		//ビーンズを使う
 		UserModel userModel=new UserModel();
-		String loginInfo=userModel.login(mail, password);
+		loginInfo=userModel.login(mail, password);
 		if(loginInfo!=null) {
 			session.setAttribute("loginInfo", loginInfo);
-			resp.sendRedirect("userLoginFinish");
+			resp.sendRedirect("top");
 		}else {
 			resp.sendRedirect("userLogin?error=mistake");
 		}

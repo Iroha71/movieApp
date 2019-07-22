@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie.beans.MovieReservationBeans;
+import movie.beans.ReservationBeans;
 import movie.model.ReservationMovieModel;
+
+
 @WebServlet("/show")
 public class MovieReservationDeleteStartController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<MovieReservationBeans>list = new ArrayList<MovieReservationBeans>();
-		ReservationMovieModel reservationmovieModel = new ReservationMovieModel();
+		List<ReservationBeans>list = new ArrayList<ReservationBeans>();
+		ReservationMovieModel  reservationmovieModel = new ReservationMovieModel();
 
 		//UserInfoBeans userInfo = (UserInfoBeans)request.getSession().getAttribute("userInfo");
 		//int MemberNumber = (int)userInfo.getMemberNumber();

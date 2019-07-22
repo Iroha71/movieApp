@@ -10,6 +10,7 @@
 <title>TOP</title>
 </head>
 <body>
+<jsp:include page="./header/header.jsp" />
 <%
  List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
 %>

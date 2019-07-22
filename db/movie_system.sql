@@ -1,5 +1,5 @@
 /*映画予約システム SQL(梅木) 変更したらバージョン記述↓ */
-/* ver1.4 */
+/* ver1.5 */
 
 DROP TABLE movie_reservation_item;
 
@@ -154,3 +154,7 @@ CREATE TABLE movie_reservation_item(
 	foreign key (reservation_number) references movie_reservation(reservation_number),
 	foreign key (movie_fee_number) references movie_fee(movie_fee_number)
 );
+
+/* 退会済み管理フラグ */
+
+ALTER TABLE member ADD is_deleted boolean DEFAULT false NOT NULL;

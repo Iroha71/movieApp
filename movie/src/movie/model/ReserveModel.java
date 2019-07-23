@@ -31,13 +31,14 @@ public class ReserveModel {
 		}
 	}
 
-	public String[] property() throws IOException {
+	public String[] property(Integer ScreenNumber) throws IOException {
 		Properties pro = new Properties();
 		String pass = "sheet.properties";
+		String sheetPass = "sheet"+ScreenNumber;
 		InputStream is = this.getClass().getClassLoader().getResourceAsStream(pass);
 
 		pro.load(is);
-		String sheet = pro.getProperty("sheet1");
+		String sheet = pro.getProperty(sheetPass);
 
 		String[] sheets = sheet.split(",");
 

@@ -24,17 +24,21 @@ public class MovieDao extends DaoBase {
 
   	  PreparedStatement stmt=null;
   	  ResultSet rs=null;
+  	  String sql = "SELECT movie.movie_id,movie.movie_name,movie.cast,movie.directed,movie.movie_detail,movie_term.term_type,term.term_start,term.term_finish,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number," +
+  	  		"screen.sheet_total,count(movie_reservation_item.reservation_number) as reserve_sheet " +
+  	  		"FROM movie LEFT OUTER JOIN movie_term ON movie.movie_id = movie_term.movie_id " +
+  	  		"LEFT OUTER JOIN term ON movie_term.term_type = term.term_type " +
+  	  		"LEFT OUTER JOIN movie_screen ON movie.movie_id = movie_screen.movie_id " +
+  	  		"LEFT OUTER JOIN screen ON movie_screen.screen_number = screen.screen_number AND movie_screen.theater_id = screen.theater_id " +
+  	  		"LEFT OUTER JOIN theater ON screen.theater_id = theater.theater_id \r\n" +
+  	  		"LEFT OUTER JOIN movie_reservation ON movie_term.movie_term_number = movie_reservation.movie_term_number AND movie_screen.theater_id = movie_reservation.theater_id AND movie_screen.screen_number = movie_reservation.screen_number " +
+  	  		"LEFT OUTER JOIN movie_reservation_item ON movie_reservation.reservation_number = movie_reservation_item.reservation_number " +
+  	  		"GROUP BY movie.movie_id,movie.movie_name,movie.cast,movie.directed,movie.movie_detail,movie_term.term_type,term.term_start,term.term_finish,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number";
 
         try{
   			///////////////////////////////////
   			//SELECT文の発行
-  			stmt = con.prepareStatement("SELECT *,screen.sheet_total,(SELECT COUNT(*) "
-  					+ "FROM(screen INNER JOIN movie_reservation ON screen.theater_id=movie_reservation.theater_id) "
-  					+ "INNER JOIN movie_reservation_item ON movie_reservation.reservation_number=movie_reservation_item.reservation_number) as count "
-  					+ "FROM ((movie INNER JOIN movie_term ON movie.movie_id=movie_term.movie_id) "
-  					+ "INNER JOIN movie_reservation ON movie_reservation.movie_term_number) "
-  					+ "INNER JOIN screen ON screen.theater_id=movie_reservation.theater_id "
-  					+ "INNER JOIN term ON movie_term.movie_term_number=term.term_type");
+  			stmt = con.prepareStatement(sql);
 
   			rs=stmt.executeQuery();
 
@@ -43,11 +47,17 @@ public class MovieDao extends DaoBase {
   				//ビーンズのリストに格納する
   				MovieListBeans beans = new MovieListBeans();
 
+  				beans.setMovieId(rs.getInt("movie_id"));
   				beans.setMovieName(rs.getString("movie_name"));
+  				beans.setCast(rs.getString("cast"));
+  				beans.setDirected(rs.getString("directed"));
+  				beans.setDetail(rs.getString("movie_detail"));
   				beans.setTermStart(rs.getTimestamp("term_start"));
   				beans.setTermFinish(rs.getTimestamp("term_finish"));
-  				beans.setCount(rs.getInt("count"));
+  				beans.setTheaterId(rs.getString("theater_id"));
+  				beans.setTheaterName(rs.getString("theater_name"));
   				beans.setSheet(rs.getInt("sheet_total"));
+  				beans.setCount(rs.getInt("reserve_sheet"));
 
   				list.add(beans);
   			}

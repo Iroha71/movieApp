@@ -26,6 +26,7 @@ public class MovieReservationStartController extends HttpServlet {
 		List<FeeBeans> feeList=new MovieModel().getFee();
 		UserInfoBeans loginInfo = (UserInfoBeans) session.getAttribute("loginInfo");
 		Integer flag = (Integer)session.getAttribute("flag");
+
 		if(loginInfo == null) {
 
 			Integer MovieTermNumber = Integer.parseInt((String)request.getParameter("term"));
@@ -59,13 +60,14 @@ public class MovieReservationStartController extends HttpServlet {
 			session.setAttribute("reserveSheetList", reserveSheetList);
 			session.setAttribute("flag", flag);
 
-			String[] sheets = reserve.property();
+			String[] sheets = reserve.property(ScreenNumber);
 			request.setAttribute("sheets", sheets);
 			RequestDispatcher dispatcher=request.getRequestDispatcher("WEB-INF/jsp/reservation.jsp");
 			dispatcher.forward(request,response);
 
 		}else {
-			String[] sheets = reserve.property();
+			Integer ScreenNumber = (Integer)session.getAttribute("ScreenNumber");
+			String[] sheets = reserve.property(ScreenNumber);
 			request.setAttribute("sheets", sheets);
 			RequestDispatcher dispatcher=request.getRequestDispatcher("WEB-INF/jsp/reservation.jsp");
 			dispatcher.forward(request,response);

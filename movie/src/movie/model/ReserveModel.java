@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import movie.beans.ReservationBeans;
 import movie.dao.ReservationDao;
 
 public class ReserveModel {
@@ -59,5 +60,22 @@ public class ReserveModel {
 			}
 		}
 		return reserveList;
+	}
+
+	public List<ReservationBeans> getReserveList(int memberNumber){
+		List<ReservationBeans>list =new ArrayList<ReservationBeans>();
+		ReservationDao reservation = new ReservationDao();
+		try {
+			reservation.connect();
+			list=reservation.selectReservation(memberNumber);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(reservation!=null) {
+				reservation.close();
+				reservation = null;
+			}
+		}
+		return list;
 	}
 }

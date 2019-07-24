@@ -29,7 +29,11 @@
             </div>
                 <table border="0" class="info">
                 <tr>
-                <td class="title" algin="left"><%=beans.getMovieName()%></td>
+                <td class="title" algin="left"><%=beans.getMovieName()%>
+                <input type="hidden" name = "term" value=<%=beans.getMovieName() %> >
+                <input type="hidden" name = "theater" value=<%=beans.getMovieName() %> >
+                <input type="hidden" name = "screen" value=<%=beans.getMovieName() %> >
+                <input type="hidden" name = "member" value=<%=beans.getMovieName() %> ></td>
                 </tr>
                 <form action="MovieReservationStartContorller" method="get">
                 <tr>

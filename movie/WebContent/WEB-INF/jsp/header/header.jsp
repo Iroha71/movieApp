@@ -5,11 +5,11 @@
 <%@ page import="movie.model.UserModel" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.*" %>
-<% UserInfoBeans beans=(UserInfoBeans)session.getAttribute("loginInfo");%>
+<% UserInfoBeans info=(UserInfoBeans)session.getAttribute("loginInfo");%>
 <link rel="stylesheet" href="css/header.css">
+<%if(info==null){ %>
 <header class="header">
 		<img src="img/logo.png" alt="ロゴ">
-
 			<div><a href="userLogin" class="link"><img src="img/user.png" alt="user">ログイン</a></div>
 		<nav class="global-nav">
 		  <ul class="global-nav__list">
@@ -26,7 +26,26 @@
 		</div>
 		<div class="black-bg" id="js-black-bg"></div>
 	  </header>
-
+<%}else{%>
+<header class="header">
+		<img src="img/logo.png" alt="ロゴ">
+			<div class="link"><%=info.getMemberName()%></a></div>
+		<nav class="global-nav">
+		  <ul class="global-nav__list">
+			<li class="global-nav__item"><a href="top">トップ</a></li>
+			<li class="global-nav__item"><a href="show">映画予約取り消し</a></li>
+			<li class="global-nav__item"><a href="">会員情報変更</a></li>
+			<li class="global-nav__item"><a href="">退会手続き</a></li>
+		  </ul>
+		</nav>
+		<div class="hamburger" id="js-hamburger">
+		  <span class="hamburger__line hamburger__line--1"></span>
+		  <span class="hamburger__line hamburger__line--2"></span>
+		  <span class="hamburger__line hamburger__line--3"></span>
+		</div>
+		<div class="black-bg" id="js-black-bg"></div>
+	  </header>
+<%} %>
 <script type="text/javascript">
 function toggleNav() {
   var body = document.body;

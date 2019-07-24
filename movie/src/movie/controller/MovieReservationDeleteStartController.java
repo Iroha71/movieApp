@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import movie.beans.ReservationBeans;
-import movie.model.ReservationMovieModel;
+import movie.beans.UserInfoBeans;
+import movie.model.ReserveModel;
 
 
 @WebServlet("/show")
@@ -22,14 +23,20 @@ public class MovieReservationDeleteStartController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		List<ReservationBeans>list = new ArrayList<ReservationBeans>();
-		ReservationMovieModel  reservationmovieModel = new ReservationMovieModel();
+		//ReservationMovieModel  reservationmovieModel = new ReservationMovieModel();
+		ReserveModel reservationModel=new ReserveModel();
 
-		//UserInfoBeans userInfo = (UserInfoBeans)request.getSession().getAttribute("userInfo");
-		//int MemberNumber = (int)userInfo.getMemberNumber();
+		UserInfoBeans userInfo = (UserInfoBeans)request.getSession().getAttribute("loginInfo");
+		int MemberNumber = (int)userInfo.getMemberNumber();
+		list = reservationModel.getReserveList(MemberNumber);
+
+		//int MemberNumber = 1;
 		//list = reservationmovieModel.getList(MemberNumber);
+		for(ReservationBeans r:list) {
+			System.out.println(r.getReservationNumber());
+		}
+		System.out.print(list);
 
-		int MemberNumber = 1;
-		list = reservationmovieModel.getList(MemberNumber);
 		request.setAttribute("list",list);
 
 

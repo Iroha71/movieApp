@@ -153,21 +153,22 @@ public class ReservationDao extends DaoBase{
 		return list;
 	}
 
-	public void delete(int memberNumber,int sheetNumber,int reservationNumber){
+	public void delete(int memberNumber,int reservationNumber){
 		if(con == null) {
 			//接続していない場合は何もしない
 						return;
 		}
 
 		PreparedStatement stmt = null;
+		PreparedStatement stmt2=null;
 		try {
 			//予約明細用DELETE文の発行
-			stmt = con.prepareStatement("DELETE  FROM movie_reservation_item  WHERE sheet_number = ? and reservation_number = ?");
-
-			stmt.setInt(1, sheetNumber);
-			stmt.setInt(2,reservationNumber);
-
+			stmt = con.prepareStatement("delete from movie_reservation_item where reservation_number=?");
+			stmt.setInt(1,reservationNumber);
+			stmt2=con.prepareStatement("DELETE  FROM movie_reservation  WHERE reservation_number = ?");
+			stmt2.setInt(1, reservationNumber);
 			stmt.executeUpdate();
+			stmt2.executeUpdate();
 
 		}catch(SQLException e) {
 			//errorが発生した場合にコンソールにログを出力する
@@ -216,5 +217,54 @@ public class ReservationDao extends DaoBase{
 			}
 		}
 		return reserveList;
+	}
+
+	public List<ReservationBeans> selectReservation(int memberNumber){
+		if(con==null) {
+			return null;
+		}
+		List<ReservationBeans> list=new ArrayList<ReservationBeans>();
+		ResultSet rs =null;
+		PreparedStatement stmt=null;
+		try {
+			String sql="select sheet_number,movie_reservation.reservation_number,movie.movie_name from movie_reservation_item " +
+					"	inner join movie_reservation on movie_reservation_item.reservation_number = movie_reservation.reservation_number" +
+					"    inner join movie_term on movie_term.movie_term_number = movie_reservation.movie_term_number" +
+					"    inner join movie on movie_term.movie_id = movie.movie_id "+
+					"    where member_number = ?";
+			String sqlOnlyReservation="select reservation_number,movie_name from movie_reservation " +
+					" inner join movie_term on movie_reservation.movie_term_number = movie_term.movie_term_number" +
+					" inner join movie on movie_term.movie_id = movie.movie_id" +
+					" where movie_reservation.member_number = ?";
+			stmt=con.prepareStatement(sqlOnlyReservation);
+			stmt.setInt(1, memberNumber);
+			rs=stmt.executeQuery();
+			while(rs.next()) {
+				ReservationBeans rb=new ReservationBeans();
+				rb.setReservationNumber(rs.getInt("reservation_number"));
+				rb.setMovieName(rs.getString("movie_name"));
+				list.add(rb);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(stmt!=null) {
+				try {
+					stmt.close();
+					stmt=null;
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(rs!=null) {
+				try {
+					rs.close();
+					rs=null;
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
 	}
 }

@@ -29,13 +29,13 @@ public class ReservationMovieModel{
 	}
 
 
-	public void delete(int memberNumber , int sheetNumber ,int reservationNumber) {
+	public void delete(int memberNumber ,int reservationNumber) {
 
 		ReservationDao Reservationdao = new ReservationDao();
 		try {
 			Reservationdao.connect();
 
-		Reservationdao.delete(memberNumber,sheetNumber,reservationNumber);
+		Reservationdao.delete(memberNumber,reservationNumber);
 		}catch(Exception e){
 			//errorが発生した場合にコンソールにログを出力する
 			e.printStackTrace();

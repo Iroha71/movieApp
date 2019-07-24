@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="movie.beans.MovieListBeans" %>
+<%@ page import="movie.beans.UserInfoBeans" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.*" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
@@ -15,6 +16,8 @@
 <jsp:include page="./header/header.jsp" />
 <%
  List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
+UserInfoBeans info=(UserInfoBeans)session.getAttribute("loginInfo");
+
  SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
 %>
@@ -28,21 +31,21 @@
 %>
 <div class="movie">
     <div>
-        <img src="img/harry.png" class="movie-img">
+        <img src="" class="movie-img">
             </div>
                 <table border="0" class="info">
                 <tr>
                 <td class="title" algin="left"><%=beans.getMovieName()%>
-                <input type="hidden" name = "term" value=<%=beans.getMovieName() %> >
-                <input type="hidden" name = "theater" value=<%=beans.getMovieName() %> >
-                <input type="hidden" name = "screen" value=<%=beans.getMovieName() %> >
-                <input type="hidden" name = "member" value=<%=beans.getMovieName() %> ></td>
+                <input type="hidden" name = "term" value=<%=beans.getTermType() %> >
+                <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
+                <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
+                <input type="hidden" name = "member" value=<%=info.getMemberNumber() %> ></td>
                 </tr>
                 <form action="MovieReservationStartContorller" method="get">
                 <tr>
                 <td class="ticket"><button type="submit" name="ticket" class="tbtn">
                             <table border="0" class="status">
-                                <tr><td><%=beans.getTermStart()%>～<%=beans.getTermFinish()%></td></tr>
+                                <tr><td><%=sdf.format(beans.getTermStart())%>～<%=sdf.format(beans.getTermFinish())%></td></tr>
                                 <tr><td><% if( percent >=0.9){ %>
 	    		                          ◎
 	    	                            <%}else if(percent >=0.3){%>
@@ -58,35 +61,5 @@
             </table>
         </div>
         <% } }%>
-
-<form action="MovieReservationStartContorller" method="get">
-<button type="submit" name="ticket">
-<table border="0">
-	<tr>
-		<td>タイトル : </td>
-		<td><%=beans.getMovieName()%></td>
-	</tr>
-	<tr>
-		<td>上映時間 : </td>
-		<td><%=sdf.format(beans.getTermStart())%>～<%=sdf.format(beans.getTermFinish())%></td>
-
-	</tr>
-
-	<tr>
-	    <td>残り状況 : </td>
-	    <td><% if( percent >=0.9){ %>
-	    		◎
-	    	<%}else if(percent >=0.3){%>
-	    	    〇
-	    	<%}else if(percent >=0.01){ %>
-	    	    △
-	    	<%}else if(percent ==0){ %>
-	    	    ×<%} %></td>
-	</tr>
-</table>
-</button>
-</form>
-</div>
-<% } }%>
 </body>
 </html>

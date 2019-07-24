@@ -24,7 +24,7 @@ public class MovieDao extends DaoBase {
 
   	  PreparedStatement stmt=null;
   	  ResultSet rs=null;
-  	  String sql = "SELECT movie.movie_id,movie.movie_name,movie.cast,movie.directed,movie.movie_detail,movie_term.term_type,term.term_start,term.term_finish,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number," +
+  	  String sql = "SELECT movie.movie_id,movie.movie_name,movie.cast,movie.directed,movie.movie_detail,movie_term.term_type,movie_term.movie_term_number,term.term_start,term.term_finish,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number," +
   	  		"screen.sheet_total,count(movie_reservation_item.reservation_number) as reserve_sheet " +
   	  		"FROM movie LEFT OUTER JOIN movie_term ON movie.movie_id = movie_term.movie_id " +
   	  		"LEFT OUTER JOIN term ON movie_term.term_type = term.term_type " +
@@ -58,6 +58,7 @@ public class MovieDao extends DaoBase {
   				beans.setTheaterName(rs.getString("theater_name"));
   				beans.setSheet(rs.getInt("sheet_total"));
   				beans.setCount(rs.getInt("reserve_sheet"));
+  				beans.setTermNumber(rs.getInt("movie_term_number"));
 
   				list.add(beans);
   			}

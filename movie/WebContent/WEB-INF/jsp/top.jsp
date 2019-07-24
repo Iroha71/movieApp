@@ -31,12 +31,12 @@ UserInfoBeans info=(UserInfoBeans)session.getAttribute("loginInfo");
 %>
 <div class="movie">
     <div>
-        <img src="" class="movie-img">
+        <img src="img/a.png" class="movie-img">
             </div>
                 <table border="0" class="info">
                 <tr>
-                <td class="title" algin="left"><%=beans.getMovieName()%>
-                <input type="hidden" name = "term" value=<%=beans.getTermType() %> >
+                <td class="title"><%=beans.getMovieName()%>
+                <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
                 <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
                 <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
                 <input type="hidden" name = "member" value=<%=info.getMemberNumber() %> ></td>

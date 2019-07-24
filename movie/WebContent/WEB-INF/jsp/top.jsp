@@ -3,6 +3,7 @@
 <%@ page import="movie.beans.MovieListBeans" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.*" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +15,8 @@
 <jsp:include page="./header/header.jsp" />
 <%
  List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
+ SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
 %>
 <%
     if( list != null ){
@@ -56,5 +59,34 @@
         </div>
         <% } }%>
 
+<form action="MovieReservationStartContorller" method="get">
+<button type="submit" name="ticket">
+<table border="0">
+	<tr>
+		<td>タイトル : </td>
+		<td><%=beans.getMovieName()%></td>
+	</tr>
+	<tr>
+		<td>上映時間 : </td>
+		<td><%=sdf.format(beans.getTermStart())%>～<%=sdf.format(beans.getTermFinish())%></td>
+
+	</tr>
+
+	<tr>
+	    <td>残り状況 : </td>
+	    <td><% if( percent >=0.9){ %>
+	    		◎
+	    	<%}else if(percent >=0.3){%>
+	    	    〇
+	    	<%}else if(percent >=0.01){ %>
+	    	    △
+	    	<%}else if(percent ==0){ %>
+	    	    ×<%} %></td>
+	</tr>
+</table>
+</button>
+</form>
+</div>
+<% } }%>
 </body>
 </html>

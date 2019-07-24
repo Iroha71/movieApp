@@ -19,6 +19,9 @@ public class MovieListBeans implements Serializable {
 	private Timestamp termFinish;
 	private int count;
 	private int sheet;
+	private String theaterId;
+	private String theaterName;
+	private int screenNumber;
 
 	public int getMovieId() {
 		return movieId;
@@ -92,5 +95,23 @@ public class MovieListBeans implements Serializable {
 	}
 	public void setSheet(int sheet) {
 		this.sheet = sheet;
+	}
+	public String getTheaterId() {
+		return theaterId;
+	}
+	public void setTheaterId(String theaterId) {
+		this.theaterId = theaterId;
+	}
+	public String getTheaterName() {
+		return theaterName;
+	}
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
+	}
+	public int getScreenNumber() {
+		return screenNumber;
+	}
+	public void setScreenNumber(int screenNumber) {
+		this.screenNumber = screenNumber;
 	}
 }

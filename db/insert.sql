@@ -1,5 +1,5 @@
 /* 編集の際はバージョンを記述↓ */
-/* ver1.2 */
+/* ver1.3 */
 insert into member(member_mail,member_name,member_birthday,member_phone,member_sei,member_pass)
 values('aaa@gmail.com','宮本桃太郎','1999-03-22','090-2505-9998','その他','ken0322');
 
@@ -20,6 +20,8 @@ insert into movie(administrator_number,movie_name,cast,directed,release_start_da
 insert into movie_fee(movie_id,fee_type) values(1,'大人');
 
 insert into movie_term(movie_id,term_type) values(1,'1');
+
+insert into movie_screen values(1,'1',1);
 
 insert into movie_reservation(movie_term_number,theater_id,screen_number,member_number) values(1,'1',1,1);
 

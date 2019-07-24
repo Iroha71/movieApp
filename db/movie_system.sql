@@ -1,9 +1,11 @@
 /*映画予約システム SQL(梅木) 変更したらバージョン記述↓ */
-/* ver1.5 */
+/* ver1.6 */
 
 DROP TABLE movie_reservation_item;
 
 DROP TABLE movie_reservation;
+
+DROP TABLE movie_screen;
 
 DROP TABLE movie_fee;
 
@@ -22,6 +24,7 @@ DROP TABLE theater;
 DROP TABLE administrator;
 
 DROP TABLE member;
+
 /*会員テーブル*/
 
 
@@ -124,6 +127,17 @@ CREATE TABLE movie_fee(
 	primary key(movie_fee_number),
 	foreign key (movie_id) references movie(movie_id),
 	foreign key (fee_type) references fee(fee_type)
+);
+
+/*映画スクリーン*/
+
+create table movie_screen(
+movie_id integer not null,
+theater_id varchar(128) NOT NULL,
+screen_number integer NOT NULL,
+primary key (movie_id,theater_id,screen_number),
+foreign key (movie_id) references movie(movie_id),
+foreign key (theater_id,screen_number) references screen(theater_id,screen_number)
 );
 
 /*映画予約*/

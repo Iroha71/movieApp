@@ -33,6 +33,7 @@ public class MovieListController extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.removeAttribute("flag");
 
+
 		/////////////////////////////
 		//映画の一覧をリクエストにセット
 		request.setAttribute("list", list);

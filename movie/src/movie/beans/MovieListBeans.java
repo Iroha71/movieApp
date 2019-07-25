@@ -22,6 +22,8 @@ public class MovieListBeans implements Serializable {
 	private String theaterId;
 	private String theaterName;
 	private int screenNumber;
+	private int TermNumber;
+
 
 	public int getMovieId() {
 		return movieId;
@@ -113,5 +115,11 @@ public class MovieListBeans implements Serializable {
 	}
 	public void setScreenNumber(int screenNumber) {
 		this.screenNumber = screenNumber;
+	}
+	public int getTermNumber() {
+		return TermNumber;
+	}
+	public void setTermNumber(int termNumber) {
+		TermNumber = termNumber;
 	}
 }

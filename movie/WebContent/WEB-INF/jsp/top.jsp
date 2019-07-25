@@ -16,7 +16,7 @@
 <jsp:include page="./header/header.jsp" />
 <%
  List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
-UserInfoBeans info=(UserInfoBeans)session.getAttribute("loginInfo");
+ UserInfoBeans info=(UserInfoBeans)session.getAttribute("loginInfo");
 
  SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
@@ -36,10 +36,19 @@ UserInfoBeans info=(UserInfoBeans)session.getAttribute("loginInfo");
                 <table border="0" class="info">
                 <tr>
                 <td class="title"><%=beans.getMovieName()%>
+
+                <%if(info==null){ %>
                 <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
                 <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
                 <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
-                <input type="hidden" name = "member" value=<%=info.getMemberNumber() %> ></td>
+
+                <%}else{ %>
+                <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
+                <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
+                <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
+                <input type="hidden" name = "member" value=<%=info.getMemberNumber() %> >
+                <%} %>
+                </td>
                 </tr>
                 <form action="MovieReservationStartContorller" method="get">
                 <tr>

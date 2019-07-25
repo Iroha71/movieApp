@@ -10,12 +10,12 @@
 <%if(info==null){ %>
 <header class="header">
 		<img src="img/logo.png" alt="ロゴ">
-			<div><a href="userLogin" class="link"><img src="img/user.png" alt="user">ログイン</a></div>
+			<div><a href="userLogin" class="login"><img src="img/user.png" alt="user">ログイン</a></div>
 		<nav class="global-nav">
 		  <ul class="global-nav__list">
 			<li class="global-nav__item"><a href="top">トップ</a></li>
-			<li class="global-nav__item"><a href="show">映画予約取り消し</a></li>
-			<li class="global-nav__item"><a href="">会員情報変更</a></li>
+			<li class="global-nav__item"><a href="userLogin">ログイン</a></li>
+			<li class="global-nav__item"><a href="subscribestartServlet">新規会員登録</a></li>
 			<li class="global-nav__item"><a href="">退会手続き</a></li>
 		  </ul>
 		</nav>
@@ -29,7 +29,7 @@
 <%}else{%>
 <header class="header">
 		<img src="img/logo.png" alt="ロゴ">
-			<div class="link"><%=info.getMemberName()%></a></div>
+			<div class="info">ようこそ、<%=info.getMemberName()%>さん</div>
 		<nav class="global-nav">
 		  <ul class="global-nav__list">
 			<li class="global-nav__item"><a href="top">トップ</a></li>

@@ -44,12 +44,16 @@ public class MovieCreateServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		String termType = Sanitize.sanitizing(req.getParameter("term"));
+		String theaterId = Sanitize.sanitizing(req.getParameter("theater"));
+		String screen = Sanitize.sanitizing(req.getParameter("screen"));
+		Integer screenNumber = Integer.parseInt(screen);
 		String directed=Sanitize.sanitizing(req.getParameter("directed"));
 		String cast=Sanitize.sanitizing(req.getParameter("cast"));
 		String detail=Sanitize.sanitizing(req.getParameter("movieDetail"));
-		String fee_type=Sanitize.sanitizing(req.getParameter("feeType"));
+		String fee_type=Sanitize.sanitizing(req.getParameter("fee"));
 		MovieModel movieModel=new MovieModel();
-		movieModel.createMovie(loginInfo, movieName, releaseDate, finishDate, directed, cast, fee_type, detail,thumbnail);
+		movieModel.createMovie(loginInfo, movieName, releaseDate, finishDate, directed, cast,detail,thumbnail,termType,termType,theaterId,screenNumber);
 		resp.sendRedirect("movieCreateFinish");
 	}
 

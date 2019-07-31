@@ -90,7 +90,12 @@ public class MovieDao extends DaoBase {
     	  MovieListBeans beans;
     	  PreparedStatement stmt=null;
     	  ResultSet rs=null;
-    	  String sql = "SELECT * FROM movie";
+    	  String sql = "SELECT movie.*,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number,term.term_type,term.term_start,term.term_finish " +
+    	  		"FROM movie INNER JOIN movie_screen ON movie.movie_id = movie_screen.movie_id " +
+    	  		"INNER JOIN screen ON movie_screen.screen_number = screen.screen_number AND movie_screen.theater_id = screen.theater_id " +
+    	  		"INNER JOIN theater ON screen.theater_id = theater.theater_id "+
+    	  		"INNER JOIN movie_term ON movie.movie_id = movie_term.movie_id "+
+    	  		"INNER JOIN term ON movie_term.term_type = term.term_type";
           try{
     			///////////////////////////////////
     			//SELECT文の発行
@@ -108,7 +113,12 @@ public class MovieDao extends DaoBase {
     				beans.setCast(rs.getString("cast"));
     				beans.setDirected(rs.getString("directed"));
     				beans.setDetail(rs.getString("movie_detail"));
-
+    				beans.setTheaterId(rs.getString("theater_id"));
+    				beans.setTheaterName(rs.getString("theater_name"));
+    				beans.setScreenNumber(rs.getInt("screen_number"));
+    				beans.setTermType(rs.getString("term_type"));
+    				beans.setTermStart(rs.getTimestamp("term_start"));
+    				beans.setTermFinish(rs.getTimestamp("term_finish"));
     				list.add(beans);
     			}
     		}catch(SQLException e) {
@@ -222,7 +232,86 @@ public class MovieDao extends DaoBase {
 	  	return feeType;
 
 	}
-    //UPDATE用
+	//映画登録と映画更新用のシアターとスクリーン情報を取得
+	public List<MovieListBeans> ScreenList(){
+
+		MovieListBeans beans;
+		List<MovieListBeans> list = new ArrayList<MovieListBeans>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT theater.theater_id,theater.theater_name,screen.screen_number,screen.sheet_total "+
+					 "FROM screen INNER JOIN theater ON screen.theater_id = theater.theater_id";
+	  	try {
+	  		stmt = con.prepareStatement(sql);
+
+	  		rs = stmt.executeQuery();
+
+	  		while(rs.next()) {
+	  			beans = new MovieListBeans();
+
+	  			beans.setTheaterId(rs.getString("theater_id"));
+	  			beans.setTheaterName(rs.getString("theater_name"));
+	  			beans.setScreenNumber(rs.getInt("screen_number"));
+	  			beans.setSheet(rs.getInt("screen_number"));
+
+	  			list.add(beans);
+
+	  		}
+	  	}catch(SQLException e) {
+	  		e.printStackTrace();
+	  	}
+
+	  	finally{
+	  		if(con != null) {
+	  			try {
+	  				con.close();
+	  			}catch(SQLException e) {
+	  				e.printStackTrace();
+	  			}
+	  		}
+	  	}
+
+		return list;
+	}
+
+	public List<MovieListBeans> TermList(){
+		MovieListBeans beans;
+		List<MovieListBeans> list = new ArrayList<MovieListBeans>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM term";
+	  	try {
+	  		stmt = con.prepareStatement(sql);
+
+	  		rs = stmt.executeQuery();
+
+	  		while(rs.next()) {
+	  			beans = new MovieListBeans();
+
+	  			beans.setTermType(rs.getString("term_type"));
+	  			beans.setTermStart(rs.getTimestamp("term_start"));
+	  			beans.setTermFinish(rs.getTimestamp("term_finish"));
+	  			list.add(beans);
+
+	  		}
+	  	}catch(SQLException e) {
+	  		e.printStackTrace();
+	  	}
+
+	  	finally{
+	  		if(con != null) {
+	  			try {
+	  				con.close();
+	  			}catch(SQLException e) {
+	  				e.printStackTrace();
+	  			}
+	  		}
+	  	}
+
+		return list;
+	}
+
+	//UPDATE用
     public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail) {
     	if(con == null) {
     		return;
@@ -243,6 +332,65 @@ public class MovieDao extends DaoBase {
     		stmt.setInt(7,movieId);
     		stmt.executeUpdate();
 
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
+
+    public void updateFee(int movieId,String feeType) {
+    	if(con == null) {
+    		return;
+    	}
+    	PreparedStatement stmt = null;
+
+    	String sql = "UPDATE movie_fee SET fee_type = ? WHERE movie_id = ?";
+
+    	try {
+    		stmt = con.prepareStatement(sql);
+
+    		stmt.setString(1,feeType);
+    		stmt.setInt(2, movieId);
+
+    		stmt.executeUpdate();
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
+    public void updateScreen(int movieId,String theaterId,int screenNumber) {
+    	if(con == null) {
+    		return;
+    	}
+    	PreparedStatement stmt = null;
+
+    	String sql = "UPDATE movie_screen SET theater_id = ?,screen_number = ? WHERE movie_id = ?";
+
+    	try {
+    		stmt = con.prepareStatement(sql);
+
+    		stmt.setString(1,theaterId);
+    		stmt.setInt(2,screenNumber);
+    		stmt.setInt(3, movieId);
+
+    		stmt.executeUpdate();
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
+    public void updateTerm(int movieId,String termType) {
+    	if(con == null) {
+    		return;
+    	}
+    	PreparedStatement stmt = null;
+
+    	String sql = "UPDATE movie_term SET term_type = ? WHERE movie_id = ?";
+
+    	try {
+    		stmt = con.prepareStatement(sql);
+
+    		stmt.setString(1,termType);
+    		stmt.setInt(2, movieId);
+
+    		stmt.executeUpdate();
     	}catch(SQLException e) {
     		e.printStackTrace();
     	}finally {
@@ -280,7 +428,7 @@ public class MovieDao extends DaoBase {
 		}
 	}
 
-	public void insert(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail,String thumbnail) {
+	public void insertMovie(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String movieDetail,String thumbnail) {
 		if(con==null) {
 			return;
 		}
@@ -299,14 +447,87 @@ public class MovieDao extends DaoBase {
 			stmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				if(stmt!=null) {
-					stmt.close();
-					stmt=null;
+		}
+	}
+	public void insertScreen(String movieName,Date releaseDate,Date finishDate,String directed,String cast,String movieDetail,String thumbnail,String theaterId,Integer screenNumber) {
+		if(con==null) {
+			return;
+		}
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		int movieId = 0;
+		String sql = "SELECT movie_id FROM movie WHEHE movie_name = ? AND release_start_date = ? AND release_finish_date = ? AND cast = ? AND directed = ? AND movie_detail = ?";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, movieName);
+			stmt.setDate(2,releaseDate);
+			stmt.setDate(3, finishDate);
+			stmt.setString(4, cast);
+			stmt.setString(5, directed);
+			stmt.setString(6, movieDetail);
+			rs = stmt.executeQuery();
+
+			while(rs.next()) {
+				movieId = rs.getInt("movie_id");
+			}
+
+			sql = "INSERT INTO movie_screen VALUES(?,?,?)";
+
+			stmt =con.prepareStatement(sql);
+
+			stmt.setInt(1,movieId);
+			stmt.setString(2,theaterId);
+			stmt.setInt(3, screenNumber);
+
+			stmt.executeUpdate();
+		}catch(SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
+	public void insertTerm(String movieName,Date releaseDate,Date finishDate,String directed,String cast,String movieDetail,String thumbnail,String termType) {
+		if(con==null) {
+			return;
+		}
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		int movieId = 0;
+		String sql = "SELECT movie_id FROM movie WHEHE movie_name = ? AND release_start_date = ? AND release_finish_date = ? AND cast = ? AND directed = ? AND movie_detail = ?";
+
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, movieName);
+			stmt.setDate(2,releaseDate);
+			stmt.setDate(3, finishDate);
+			stmt.setString(4, cast);
+			stmt.setString(5, directed);
+			stmt.setString(6, movieDetail);
+			rs = stmt.executeQuery();
+
+			while(rs.next()) {
+				movieId = rs.getInt("movie_id");
+			}
+
+			sql = "INSERT INTO movie_term(movie_id,movie_term) VALUES(?,?)";
+
+			stmt =con.prepareStatement(sql);
+
+			stmt.setInt(1,movieId);
+			stmt.setString(2,termType);
+
+			stmt.executeUpdate();
+		}catch(SQLException e) {
+
+			e.printStackTrace();
+		}
+		finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
 				}
-			}catch(SQLException e) {
-				e.printStackTrace();
 			}
 		}
 	}

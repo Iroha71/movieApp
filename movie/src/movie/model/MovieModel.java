@@ -60,12 +60,18 @@ public class MovieModel {
 
 		return list;
 	}
-	public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail) {
+	public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail,String termType,String theaterId,Integer screenNumber,String feeType) {
 		MovieDao moviedao = new MovieDao();
 			try {
 				moviedao.connect();
 
 				moviedao.update(movieId,movieName, startDate, finishDate, cast,directed, detail);
+
+				moviedao.updateFee(movieId,feeType);
+
+				moviedao.updateScreen(movieId, theaterId,screenNumber);
+
+				moviedao.updateTerm(movieId,termType);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -90,15 +96,17 @@ public class MovieModel {
 		}
 	}
 
-	public void createMovie(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail,String thumbnail) {
+	public void createMovie(int adminId,String movieName,Date releaseDate,Date finishDate,String directed,String cast,String fee_type,String movieDetail,String thumbnail,String termType,String theaterId,Integer screenNumber) {
 		MovieDao movieDao=new MovieDao();
 		MovieFeeDao movieFeeDao=new MovieFeeDao();
 		try {
 			adminId=1;
 			movieDao.connect();
-			movieDao.insert(adminId, movieName, new java.sql.Date(releaseDate.getTime()), new java.sql.Date(finishDate.getTime()), directed, cast, fee_type,movieDetail,thumbnail);
+			movieDao.insertMovie(adminId, movieName, new java.sql.Date(releaseDate.getTime()), new java.sql.Date(finishDate.getTime()), directed, cast,movieDetail,thumbnail);
 			movieFeeDao.connect();
 			movieFeeDao.insert(adminId, movieName,fee_type);
+			movieDao.insertScreen(movieName, new java.sql.Date(releaseDate.getTime()), new java.sql.Date(finishDate.getTime()), directed, cast,movieDetail,thumbnail,theaterId,screenNumber);
+			movieDao.insertTerm(movieName, new java.sql.Date(releaseDate.getTime()), new java.sql.Date(finishDate.getTime()), directed, cast,movieDetail,thumbnail,termType);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -155,7 +163,45 @@ public class MovieModel {
 		return feeType;
 	}
 
-	public List<MovieListBeans> Search(String text){
+
+	public List<MovieListBeans>getScreen(){
+		List<MovieListBeans> list = new ArrayList<MovieListBeans>();
+
+		MovieDao dao = new MovieDao();
+
+		try {
+			dao.connect();
+
+			list = dao.ScreenList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			dao.close();
+		}
+
+		return list;
+	}
+	public List<MovieListBeans>getTerm(){
+		List<MovieListBeans> list = new ArrayList<MovieListBeans>();
+
+		MovieDao dao = new MovieDao();
+
+		try {
+			dao.connect();
+
+			list = dao.TermList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			dao.close();
+		}
+
+		return list;
+	}
+  
+  public List<MovieListBeans> Search(String text){
 		 List<MovieListBeans> list = new ArrayList<MovieListBeans>();
 		MovieDao dao = new MovieDao();
 

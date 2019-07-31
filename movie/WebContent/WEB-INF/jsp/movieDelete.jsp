@@ -31,81 +31,18 @@ SimpleDateFormat sdfFinishDate=new SimpleDateFormat("HH:mm:ss");
 				<tr>
 					<th></th>
 					<th>タイトル</th>
-					<th>チケット料金</th>
-					<th>座席番号</th>
-					<th>上映時間</th>
 				</tr>
 				<% for(ReservationBeans beans:list){ %>
-				<tr class="reserve-list" onClick="toggleCheckBox(<%=beans.getReservationNumber() %>)">
-					<td>
-						<input type="checkbox" name="reservation" value="<% beans.getReservationNumber();%>" id="check<%=beans.getReservationNumber()%>">
-					</td>
-					<td>
-						<input type="hidden" name = "moviename" value=<%=beans.getMovieName() %> >
-					 	<%=beans.getMovieName()%></td>
-					<td>
-						<input type="hidden" name = "feebase" value =<%=beans.getFeeBase() %>>
-					 	￥<%=beans.getFeeBase() %>
-					</td>
-					<td>
-						<input type="hidden" name = "sheetnumber" value=<%= beans.getSheetNumber()%>>
-					 	<%=beans.getSheetNumber()%>
-					</td>
-					<td>
-						<input type="hidden" name = "termstart" value="<%=beans.getTermStart()%>">
-					 	<%=sdf.format(beans.getTermStart()) %>
-					 	-
-					 	<input type="hidden" name = "termfinish" value="<%=beans.getTermFinish()%>">
-					 	<%=sdfFinishDate.format(beans.getTermFinish()) %>
-					 	<input type="hidden" name ="membernumber" value=<%=beans.getMemberNumber() %>>
-			 			<input type="hidden" name ="reservationnumber" value=<%=beans.getReservationNumber() %>>
-					</td>
+				<tr class="reserve-list"@click="toggleCheckBox(<%=beans.getReservationNumber() %>)">
+					<td><input type="checkbox" name="reservation" value="<%=beans.getReservationNumber() %>" v-model="reserveId" id="check<%=beans.getReservationNumber() %>"></td>
+					<td><%=beans.getMovieName() %></td>
 				</tr>
 				<%} %>
 			</table>
-			<input type="button" value="予約取り消し" class="btn btn-danger d-block" @click="showModal(true)">
+			<input type="button" value="予約取り消し" class="btn btn-danger d-block" @click="submitDelete">
 		</form>
 	</div>
 </article>
-<section class="modal-area col-sm-12 center" v-if="isModal">
-	<div class="check-modal center">
-		この予約を取り消しますか？
-		<table>
-			<tr>
-				<th>タイトル</th>
-				<th>チケット料金</th>
-				<th>座席番号</th>
-				<th>上映時間</th>
-			</tr>
-			<% for(ReservationBeans beans:list){ %>
-			<tr class="reserve-list" onClick="toggleCheckBox(<%=beans.getReservationNumber() %>)">
-				<td>
-					<input type="hidden" name = "moviename" value=<%=beans.getMovieName() %> >
-				 	<%=beans.getMovieName()%></td>
-				<td>
-					<input type="hidden" name = "feebase" value =<%=beans.getFeeBase() %>>
-				 	￥<%=beans.getFeeBase() %>
-				</td>
-				<td>
-					<input type="hidden" name = "sheetnumber" value=<%= beans.getSheetNumber()%>>
-				 	<%=beans.getSheetNumber()%>
-				</td>
-				<td>
-					<input type="hidden" name = "termstart" value="<%=beans.getTermStart()%>">
-				 	<%=sdf.format(beans.getTermStart()) %>
-				 	-
-				 	<input type="hidden" name = "termfinish" value="<%=beans.getTermFinish()%>">
-				 	<%=sdfFinishDate.format(beans.getTermFinish()) %>
-				 	<input type="hidden" name ="membernumber" value=<%=beans.getMemberNumber() %>>
-		 			<input type="hidden" name ="reservationnumber" value=<%=beans.getReservationNumber() %>>
-				</td>
-			</tr>
-			<%} %>
-		</table>
-		<button type="button" @click="submitDelete">取り消し</button>
-		<button type="button" @click="showModal(false)">キャンセル</button>
-	</div>
-</section>
 </div>
 </body>
 <script>
@@ -122,6 +59,7 @@ var app=new Vue({
 	methods:{
 		showModal:function(showModal){
 			this.isModal=showModal
+			console.log(this.reserveId)
 		},
 		submitDelete:function(){
 			const form=document.getElementById('deleteForm');

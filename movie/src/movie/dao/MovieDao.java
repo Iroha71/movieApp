@@ -90,7 +90,12 @@ public class MovieDao extends DaoBase {
     	  MovieListBeans beans;
     	  PreparedStatement stmt=null;
     	  ResultSet rs=null;
-    	  String sql = "SELECT * FROM movie";
+    	  String sql = "SELECT movie.*,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number,term.term_type,term.term_start,term.term_finish " +
+    	  		"FROM movie INNER JOIN movie_screen ON movie.movie_id = movie_screen.movie_id " +
+    	  		"INNER JOIN screen ON movie_screen.screen_number = screen.screen_number AND movie_screen.theater_id = screen.theater_id " +
+    	  		"INNER JOIN theater ON screen.theater_id = theater.theater_id "+
+    	  		"INNER JOIN movie_term ON movie.movie_id = movie_term.movie_id "+
+    	  		"INNER JOIN term ON movie_term.term_type = term.term_type";
           try{
     			///////////////////////////////////
     			//SELECT文の発行
@@ -108,7 +113,12 @@ public class MovieDao extends DaoBase {
     				beans.setCast(rs.getString("cast"));
     				beans.setDirected(rs.getString("directed"));
     				beans.setDetail(rs.getString("movie_detail"));
-
+    				beans.setTheaterId(rs.getString("theater_id"));
+    				beans.setTheaterName(rs.getString("theater_name"));
+    				beans.setScreenNumber(rs.getInt("screen_number"));
+    				beans.setTermType(rs.getString("term_type"));
+    				beans.setTermStart(rs.getTimestamp("term_start"));
+    				beans.setTermFinish(rs.getTimestamp("term_finish"));
     				list.add(beans);
     			}
     		}catch(SQLException e) {
@@ -324,6 +334,65 @@ public class MovieDao extends DaoBase {
 
     	}catch(SQLException e) {
     		e.printStackTrace();
+    	}
+    }
+
+    public void updateFee(int movieId,String feeType) {
+    	if(con == null) {
+    		return;
+    	}
+    	PreparedStatement stmt = null;
+
+    	String sql = "UPDATE movie_fee SET fee_type = ? WHERE movie_id = ?";
+
+    	try {
+    		stmt = con.prepareStatement(sql);
+
+    		stmt.setString(1,feeType);
+    		stmt.setInt(2, movieId);
+
+    		stmt.executeUpdate();
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
+    public void updateScreen(int movieId,String theaterId,int screenNumber) {
+    	if(con == null) {
+    		return;
+    	}
+    	PreparedStatement stmt = null;
+
+    	String sql = "UPDATE movie_screen SET theater_id = ?,screen_number = ? WHERE movie_id = ?";
+
+    	try {
+    		stmt = con.prepareStatement(sql);
+
+    		stmt.setString(1,theaterId);
+    		stmt.setInt(2,screenNumber);
+    		stmt.setInt(3, movieId);
+
+    		stmt.executeUpdate();
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
+    public void updateTerm(int movieId,String termType) {
+    	if(con == null) {
+    		return;
+    	}
+    	PreparedStatement stmt = null;
+
+    	String sql = "UPDATE movie_term SET term_type = ? WHERE movie_id = ?";
+
+    	try {
+    		stmt = con.prepareStatement(sql);
+
+    		stmt.setString(1,termType);
+    		stmt.setInt(2, movieId);
+
+    		stmt.executeUpdate();
+    	}catch(SQLException e) {
+    		e.printStackTrace();
     	}finally {
     		if(con != null) {
     			try {
@@ -378,15 +447,6 @@ public class MovieDao extends DaoBase {
 			stmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				if(stmt!=null) {
-					stmt.close();
-					stmt=null;
-				}
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	public void insertScreen(String movieName,Date releaseDate,Date finishDate,String directed,String cast,String movieDetail,String thumbnail,String theaterId,Integer screenNumber) {
@@ -425,16 +485,6 @@ public class MovieDao extends DaoBase {
 
 			e.printStackTrace();
 		}
-		finally {
-			if(con != null) {
-				try {
-					con.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
 	}
 	public void insertTerm(String movieName,Date releaseDate,Date finishDate,String directed,String cast,String movieDetail,String thumbnail,String termType) {
 		if(con==null) {

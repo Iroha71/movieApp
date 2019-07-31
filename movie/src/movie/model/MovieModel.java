@@ -60,12 +60,18 @@ public class MovieModel {
 
 		return list;
 	}
-	public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail) {
+	public void update( int movieId,String movieName,String startDate,String finishDate,String cast,String directed,String detail,String termType,String theaterId,Integer screenNumber,String feeType) {
 		MovieDao moviedao = new MovieDao();
 			try {
 				moviedao.connect();
 
 				moviedao.update(movieId,movieName, startDate, finishDate, cast,directed, detail);
+
+				moviedao.updateFee(movieId,feeType);
+
+				moviedao.updateScreen(movieId, theaterId,screenNumber);
+
+				moviedao.updateTerm(movieId,termType);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {

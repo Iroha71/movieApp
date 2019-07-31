@@ -36,6 +36,8 @@
 			<li class="global-nav__item"><a href="show">映画予約取り消し</a></li>
 			<li class="global-nav__item"><a href="">会員情報変更</a></li>
 			<li class="global-nav__item"><a href="">退会手続き</a></li>
+			<li class="global-nav__item"><a href="logout">ログアウト</a></li>
+
 		  </ul>
 		</nav>
 		<div class="hamburger" id="js-hamburger">

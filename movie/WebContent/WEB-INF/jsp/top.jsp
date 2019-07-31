@@ -18,7 +18,7 @@
  List<MovieListBeans> list = (List<MovieListBeans>)request.getAttribute("list");
  UserInfoBeans info=(UserInfoBeans)session.getAttribute("loginInfo");
 
- SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+ SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
 %>
 <%
@@ -36,7 +36,7 @@
                 <table border="0" class="info">
                 <tr>
                 <td class="title"><%=beans.getMovieName()%>
-
+                <form action="MovieReservationStartContorller" method="get">
                 <%if(info==null){ %>
                 <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
                 <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
@@ -50,7 +50,6 @@
                 <%} %>
                 </td>
                 </tr>
-                <form action="MovieReservationStartContorller" method="get">
                 <tr>
                 <td class="ticket"><button type="submit" name="ticket" class="tbtn">
                             <table border="0" class="status">

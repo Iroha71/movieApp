@@ -310,4 +310,61 @@ public class MovieDao extends DaoBase {
 			}
 		}
 	}
+
+	public List<MovieListBeans>Search(String text){
+			if( con== null ){
+		   //接続していない場合は何もしない
+		}
+
+		List<MovieListBeans> list = new ArrayList<MovieListBeans>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		  try{
+		        //検索に対するSELECT
+		      stmt = con.prepareStatement("SELECT movie.movie_id,movie.movie_name,movie.cast,movie.directed,movie.movie_detail,movie_term.term_type,term.term_start,"
+		      		+ "term.term_finish,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number," +
+		      		" screen.sheet_total,count(movie_reservation_item.reservation_number) as reserve_sheet" +
+		      		" FROM movie LEFT OUTER JOIN movie_term ON movie.movie_id = movie_term.movie_id "+
+		      		" LEFT OUTER JOIN term ON movie_term.term_type = term.term_type" +
+		      		" LEFT OUTER JOIN movie_screen ON movie.movie_id = movie_screen.movie_id"+
+		      		" LEFT OUTER JOIN screen ON movie_screen.screen_number = screen.screen_number AND movie_screen.theater_id = screen.theater_id" +
+		      		" LEFT OUTER JOIN theater ON screen.theater_id = theater.theater_id" +
+		      		" LEFT OUTER JOIN movie_reservation ON movie_term.movie_term_number = movie_reservation.movie_term_number AND "
+		      		+ "movie_screen.theater_id = movie_reservation.theater_id AND movie_screen.screen_number = movie_reservation.screen_number" +
+		      		" LEFT OUTER JOIN movie_reservation_item ON movie_reservation.reservation_number = movie_reservation_item.reservation_number"+
+		      		" WHERE movie.movie_name LIKE ?" +
+		      		" GROUP BY movie.movie_id,movie.movie_name,movie.cast,movie.directed,movie.movie_detail,movie_term.term_type,term.term_start,term.term_finish,movie_screen.theater_id,theater.theater_name,movie_screen.screen_number");
+
+		stmt.setString(1,"%"+text+"%");
+		rs = stmt.executeQuery();
+
+		while(rs.next()){
+		 //beansのリストに格納する
+		MovieListBeans beans = new MovieListBeans();
+		beans.setMovieName(rs.getString("movie_name"));
+		beans.setTermStart(rs.getTimestamp("term_start"));
+		beans.setTermFinish(rs.getTimestamp("term_finish"));
+		beans.setSheet(rs.getInt("sheet_total"));
+		beans.setCount(rs.getInt("reserve_sheet"));
+
+
+		list.add(beans);
+		}
+		}catch(SQLException e){
+		    //error発生した場合にコンソールにログを出力する
+		    e.printStackTrace();
+		}finally{
+		     //接続（コネクション）を閉じる
+		     if(con!= null){
+		          try{
+		                 con.close();
+		               }catch(SQLException e){
+		                  e.printStackTrace();
+		               }
+		       }
+		}
+		  return list;
+	}
+
 }

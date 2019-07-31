@@ -22,7 +22,7 @@ public class CheckFilter implements Filter{
 	//チェック除外画面
 		private String excludeDispList[] =
 			{
-					"/userLogin","/auth","/logout","/adminLogin","/subscribestartServlet","/subscribe","/subscribefinish","/top"
+					"/userLogin","/auth","/logout","/adminLogin","/subscribestartServlet","/subscribe","/subscribefinish","/top","/search"
 			};
 
 		private String excludeExtList[]= {

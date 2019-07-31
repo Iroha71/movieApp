@@ -154,4 +154,21 @@ public class MovieModel {
 
 		return feeType;
 	}
+
+	public List<MovieListBeans> Search(String text){
+		 List<MovieListBeans> list = new ArrayList<MovieListBeans>();
+		MovieDao dao = new MovieDao();
+
+		try{
+		  //DBの接続
+		dao.connect();
+		//一覧の取得
+		   list=dao.Search(text);
+		}catch(Exception e){
+		 //error発生した場合にコンソールログを出力する
+		   e.printStackTrace();
+		}finally{
+		    dao.close();
+		} return list;
+		}
 }

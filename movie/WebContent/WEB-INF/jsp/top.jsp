@@ -36,22 +36,27 @@
                 <table border="0" class="info">
                 <tr>
                 <td class="title"><%=beans.getMovieName()%>
+                </td>
+                </tr>
+                <tr>
                 <form action="MovieReservationStartContorller" method="get">
+                <td class="ticket">
                 <%if(info==null){ %>
                 <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
                 <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
                 <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
+                <input type="hidden" name = "sheet" value=<%=beans.getSheet() %> >
+
 
                 <%}else{ %>
                 <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
                 <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
                 <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
+                <input type="hidden" name = "sheet" value=<%=beans.getSheet() %> >
                 <input type="hidden" name = "member" value=<%=info.getMemberNumber() %> >
                 <%} %>
-                </td>
-                </tr>
-                <tr>
-                <td class="ticket"><button type="submit" name="ticket" class="tbtn">
+
+                <button type="submit" name="ticket" class="tbtn">
                             <table border="0" class="status">
                                 <tr><td><%=sdf.format(beans.getTermStart())%>～<%=sdf.format(beans.getTermFinish())%></td></tr>
                                 <tr><td><% if( percent >=0.9){ %>
@@ -63,9 +68,9 @@
 	    	                            <%}else if(percent ==0){ %>
 	    	                              ×<%} %></td></tr>
                             </table>
-                </button></td>
+                </button></form>
+                </td>
                </tr>
-               </form>
             </table>
         </div>
         <% } }%>

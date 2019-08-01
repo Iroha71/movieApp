@@ -56,6 +56,7 @@ public class MovieDao extends DaoBase {
   				beans.setTermFinish(rs.getTimestamp("term_finish"));
   				beans.setTheaterId(rs.getString("theater_id"));
   				beans.setTheaterName(rs.getString("theater_name"));
+  				beans.setScreenNumber(rs.getInt("screen_number"));
   				beans.setSheet(rs.getInt("sheet_total"));
   				beans.setCount(rs.getInt("reserve_sheet"));
   				beans.setTermNumber(rs.getInt("movie_term_number"));

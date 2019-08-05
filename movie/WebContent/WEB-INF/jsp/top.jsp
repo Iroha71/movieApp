@@ -37,7 +37,6 @@
                 <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
                 <input type="hidden" name = "sheet" value=<%=beans.getSheet() %> >
 
-
                 <%}else{ %>
                 <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
                 <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >

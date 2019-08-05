@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "movie.beans.FeeBeans" %>
+<%@ page import = "movie.beans.MovieListBeans" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.*" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,9 @@
 <jsp:include page="./header/header.jsp" />
 <%
 	List<FeeBeans>feeType = (List<FeeBeans>)request.getAttribute("feeType");
+	List<MovieListBeans>ScreenList = (List<MovieListBeans>)request.getAttribute("screenList");
+	List<MovieListBeans>TermList = (List<MovieListBeans>)request.getAttribute("termList");
+	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 %>
 	<div class="container-fluid">
 		<div class="row">
@@ -30,6 +35,15 @@
 				</div>
 				<div class ="detail-group">
 					<span>公開終了日</span>
+				</div>
+				<div class = "detail-group">
+					<span>公開時間</span>
+				</div>
+				<div class = "detail-group">
+					<span>シアター</span>
+				</div>
+				<div class = "detail-group">
+					<span>スクリーン</span>
 				</div>
 				<div class ="detail-group">
 					<span>監督</span>
@@ -57,6 +71,27 @@
 						<br>
 						<input type="date" name="releaseFinishDate" class="form-control">
 					</div>
+					<div class = "form-group">
+						<select name = "term" class="Select">
+							<%for(MovieListBeans termBeans : TermList){ %>
+								<option value="<%=termBeans.getTermType()%>"><%=termBeans.getTermType()%>:<%=sdf.format(termBeans.getTermStart()) %>～<%=sdf.format(termBeans.getTermFinish()) %></option>
+							<%} %>
+						</select>
+					</div>
+					<div class = "form-group">
+						<select name = "theater" class="Select">
+							<%for(MovieListBeans ScreenBeans : ScreenList){ %>
+								<option value="<%=ScreenBeans.getTheaterId()%>"><%=ScreenBeans.getTheaterId()%>:<%=ScreenBeans.getTheaterName()%></option>
+							<%} %>
+						</select>
+					</div>
+					<div class = "form-group">
+						<select name = "screen" class="Select">
+							<%for(MovieListBeans ScreenBeans : ScreenList){ %>
+								<option value="<%=ScreenBeans.getScreenNumber()%>"><%=ScreenBeans.getScreenNumber()%></option>
+							<%} %>
+						</select>
+					</div>
 					<div class="form-group">
 						<input type="text" name="directed" class="form-control">
 					</div>
@@ -64,7 +99,7 @@
 						<input type="text" name="cast" class="form-control">
 					</div>
 					<div class="form-group">
-						<select name = "name" class="feeSelect">
+						<select name = "fee" class="Select">
 							<%for(FeeBeans feeBeans : feeType){ %>
 								<option value="<%=feeBeans.getFeeType()%>"><%=feeBeans.getFeeType()%>:<%=feeBeans.getFee() %>円</option>
 							<%} %>

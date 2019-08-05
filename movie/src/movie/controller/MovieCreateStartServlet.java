@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import movie.beans.FeeBeans;
+import movie.beans.MovieListBeans;
 import movie.model.MovieModel;
 
 @WebServlet("/movieCreateStart")
@@ -22,9 +23,16 @@ public class MovieCreateStartServlet extends HttpServlet {
 
 		MovieModel movieModel = new MovieModel();
 		List<FeeBeans> feeType = new ArrayList<FeeBeans>();
+		List<MovieListBeans>screenList = new ArrayList<MovieListBeans>();
+		List<MovieListBeans>termList = new ArrayList<MovieListBeans>();
 
 		feeType = movieModel.getFee();
+		screenList = movieModel.getScreen();
+		termList = movieModel.getTerm();
+
 		req.setAttribute("feeType", feeType);
+		req.setAttribute("screenList", screenList);
+		req.setAttribute("termList", termList);
 
 		RequestDispatcher dis=req.getRequestDispatcher("WEB-INF/jsp/movieCreate.jsp");
 		dis.forward(req, resp);

@@ -15,6 +15,7 @@ public class MovieListBeans implements Serializable {
 	private Date startDate;
 	private Date finishDate;
 	private String detail;
+	private String termType;
 	private Timestamp termStart;
 	private Timestamp termFinish;
 	private int count;
@@ -72,6 +73,12 @@ public class MovieListBeans implements Serializable {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public String getTermType() {
+		return termType;
+	}
+	public void setTermType(String termType) {
+		this.termType = termType;
 	}
 	public Timestamp getTermStart() {
 		return termStart;

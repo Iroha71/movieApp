@@ -16,7 +16,7 @@
 			<li class="global-nav__item"><a href="top">トップ</a></li>
 			<li class="global-nav__item"><a href="userLogin">ログイン</a></li>
 			<li class="global-nav__item"><a href="subscribestartServlet">新規会員登録</a></li>
-			<li class="global-nav__item"><a href="">退会手続き</a></li>
+			<li class="global-nav__item"><a href="userDeleteStart">退会手続き</a></li>
 		  </ul>
 		</nav>
 		<div class="hamburger" id="js-hamburger">
@@ -34,8 +34,8 @@
 		  <ul class="global-nav__list">
 			<li class="global-nav__item"><a href="top">トップ</a></li>
 			<li class="global-nav__item"><a href="show">映画予約取り消し</a></li>
-			<li class="global-nav__item"><a href="">会員情報変更</a></li>
-			<li class="global-nav__item"><a href="">退会手続き</a></li>
+			<li class="global-nav__item"><a href="subscribestartServlet">会員情報変更</a></li>
+			<li class="global-nav__item"><a href="userDeleteStart">退会手続き</a></li>
 			<li class="global-nav__item"><a href="logout">ログアウト</a></li>
 
 		  </ul>

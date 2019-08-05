@@ -32,13 +32,11 @@ public class MovieReservationStartController extends HttpServlet {
 			Integer MovieTermNumber = Integer.parseInt((String)request.getParameter("term"));
 			String TheaterId = (String)request.getParameter("theater");
 			Integer ScreenNumber = Integer.parseInt((String)request.getParameter("screen"));
-			Integer MemberNumber = Integer.parseInt((String)request.getParameter("member"));
 			flag = 1;
 
 			session.setAttribute("MovieTermNumber", MovieTermNumber);
 			session.setAttribute("TheaterId", TheaterId);
 			session.setAttribute("ScreenNumber", ScreenNumber);
-			session.setAttribute("MemberNumber", MemberNumber);
 			session.setAttribute("feeList", feeList);
 			session.setAttribute("flag", flag);
 
@@ -66,6 +64,8 @@ public class MovieReservationStartController extends HttpServlet {
 			dispatcher.forward(request,response);
 
 		}else {
+			Integer MemberNumber = loginInfo.getMemberNumber();
+			session.setAttribute("MemberNumber", MemberNumber);
 			Integer ScreenNumber = (Integer)session.getAttribute("ScreenNumber");
 			String[] sheets = reserve.property(ScreenNumber);
 			request.setAttribute("sheets", sheets);

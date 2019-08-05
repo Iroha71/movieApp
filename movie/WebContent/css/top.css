@@ -1,25 +1,17 @@
 @CHARSET "UTF-8";
 .movie{
-    display: flex;
     text-align: center;
     margin:50px 20%;
 }
-.movie-img{
-    width: 130px;
-    height:auto;
-    display: inline-block;
-}
+
 .info{
     display: inline-block;
     margin: auto 50px;
 }
-.status{
-    padding: 7px;
-}
-.title{
-	padding-top:50px;
-    padding-bottom: 10px;
-}
+
 .tbtn{
+	margin:0 auto;
+	padding:15px 10px 15px 10px;
     border-radius: 8px;
+    display:block;
 }

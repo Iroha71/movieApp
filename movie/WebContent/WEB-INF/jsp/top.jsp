@@ -30,18 +30,8 @@
 	double percent= sa / beans.getSheet();
 %>
 <div class="movie">
-    <div>
-        <img src="img/a.png" class="movie-img">
-            </div>
-                <table border="0" class="info">
-                <tr>
-                <td class="title"><%=beans.getMovieName()%>
-                </td>
-                </tr>
-                <tr>
-                <form action="MovieReservationStartContorller" method="get">
-                <td class="ticket">
-                <%if(info==null){ %>
+<form action="MovieReservationStartContorller" method="get">
+		        <%if(info==null){ %>
                 <input type="hidden" name = "term" value=<%=beans.getTermNumber() %> >
                 <input type="hidden" name = "theater" value=<%=beans.getTheaterId() %> >
                 <input type="hidden" name = "screen" value=<%=beans.getScreenNumber() %> >
@@ -55,24 +45,27 @@
                 <input type="hidden" name = "sheet" value=<%=beans.getSheet() %> >
                 <input type="hidden" name = "member" value=<%=info.getMemberNumber() %> >
                 <%} %>
-
-                <button type="submit" name="ticket" class="tbtn">
-                            <table border="0" class="status">
-                                <tr><td><%=sdf.format(beans.getTermStart())%>～<%=sdf.format(beans.getTermFinish())%></td></tr>
-                                <tr><td><% if( percent >=0.9){ %>
+        <button type="submit" name="ticket" class="tbtn">
+		<table>
+		  <tr>
+		    <td class="title"><%=beans.getMovieName()%></td>
+		  </tr>
+		  <tr>
+		    <td><%=beans.getTermStart()%>～<%=beans.getTermFinish()%></td>
+		  </tr>
+		  <tr>
+		    <td><% if( percent >=0.9){ %>
 	    		                          ◎
 	    	                            <%}else if(percent >=0.3){%>
 	    	                              〇
 	    	                            <%}else if(percent >=0.01){ %>
 	    	                              △
 	    	                            <%}else if(percent ==0){ %>
-	    	                              ×<%} %></td></tr>
-                            </table>
-                </button></form>
-                </td>
-               </tr>
-            </table>
-        </div>
-        <% } }%>
+	    	                              ×<%} %></td>
+
+		  </table>
+		  </button>
+		  </form>
+<%}} %>
 </body>
 </html>
